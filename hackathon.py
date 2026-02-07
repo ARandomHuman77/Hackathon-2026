@@ -1,8 +1,8 @@
 import pygame, sys
 from pygame.locals import QUIT
 
-WIDTH = 400
-HEIGHT = 400
+WIDTH = 1400
+HEIGHT = 800
 
 WHITE = (255, 255, 255)
 
