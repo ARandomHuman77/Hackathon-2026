@@ -5,7 +5,7 @@ the foundations of our respective cultures: the language. Fueled by our passion
 for learning, we challenged ourselves to design a game that turns everyday translations 
 into a visual experience, fostering linguistic skills and connection. Essentially, our 
 goal is to help people from diverse cultural backgrounds become exposed to a wide range 
-of languages and encourage friendship.
+of languages, encourage friendship, and, of course, have a fun time :)
 
 ## What it does
 The game displays English words and asks the player to choose the correct translation into 
