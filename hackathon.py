@@ -326,7 +326,7 @@ while running:
             "     in French, Hindi, or Mandarin",
             "2.) Guess wrong and the game ends! (RIP UFO)",
             "3.) You might want friends who speak different languages",
-            "4.) Have fun! ( ͡° ͜ʖ ͡°)"
+            "4.) Use a/d to move and space to shoot. Have fun!( ͡° ͜ʖ ͡°)"
         ]
 
 
