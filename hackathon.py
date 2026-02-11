@@ -260,6 +260,13 @@ running = True
 game_on = False
 game_over = False  # New state for game over screen
 
+# Load the music file (WAV)
+rickroll_sound = pygame.mixer.Sound("rickroll_proper.wav")
+rickroll_sound.set_volume(0.5)
+
+# Variable that keeps track if the music is playing
+rickroll_playing = False
+
 # Main Game Loop
 while running:
     clock.tick(60)
@@ -462,12 +469,19 @@ while running:
         # Draw image-based quit button
         game_over_quit_button.draw()
         play_again_button.draw()
+
+
+
+        # RESET GAME
         if play_again_button.check_click(event):
             
             rickroll_channel.stop()
             rickroll_playing = False # Stops music
 
+<<<<<<< Updated upstream
             # RESET GAME
+=======
+>>>>>>> Stashed changes
             answer_counter = 0
             shots.clear()
 
