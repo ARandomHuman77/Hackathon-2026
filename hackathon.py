@@ -610,7 +610,12 @@ max_boulder_speed = 1.0
 shots = [] 
 bullet_speed = 10
 boulder_speeds = [random.uniform(0.75, max_boulder_speed) for _ in answer_boxes]
+
 # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
+
+boulder_angles = [0 for _ in answer_boxes]  # initial rotation for each boulder
+boulder_rotation_speeds = [random.uniform(-5, 5) for _ in answer_boxes]  # degrees per frame
+
 # Game States
 running = True
 game_on = False
@@ -645,6 +650,7 @@ med_speed = pygame.Rect(550, 370, 120, 50)
 max_speed = pygame.Rect(550, 420, 120, 50)
 
 # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean] 
+
 
 
 # Main Game Loop
@@ -949,14 +955,29 @@ while running:
             box.y += boulder_speeds[i]
             # box.x += boulder_drift[i]
 
-            screen.blit(boulder_image, box.topleft)
+            # boulder rotations?
+            # Update rotation
+            boulder_angles[i] += boulder_rotation_speeds[i]
+            boulder_angles[i] %= 360  # keep angle in 0-359
+
+            # Rotate the image
+            rotated_image = pygame.transform.rotate(boulder_image, boulder_angles[i])
+            rotated_rect = rotated_image.get_rect(center=box.center)  # keep centered
+
+            # Rotate the image
+            rotated_image = pygame.transform.rotate(boulder_image, boulder_angles[i])
+            rotated_rect = rotated_image.get_rect(center=box.center)  # keep centered
+
+            screen.blit(rotated_image, rotated_rect.topleft)
             font = get_font_for_language(language)
             text_surface = font.render(answers[i], True, WHITE)
             text_rect = text_surface.get_rect(center=box.center)
             screen.blit(text_surface, text_rect)
+
             if box.y > screen.get_height():
                 game_on = False
                 game_over = True
+
 
         # Draw UFO
         screen.blit(player_ufo.image, player_ufo.rect)
@@ -991,6 +1012,8 @@ while running:
                                 # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
                                 box_y = random.randint(0, box_size)
                                 box.y = -box_y
+                            boulder_angles = [0 for _ in answer_boxes]  # initial rotation for each boulder
+                            boulder_rotation_speeds = [random.uniform(-5, 5) for _ in answer_boxes]  # degrees per frame
 
                         else:
                             # Wrong answer: trigger game over
@@ -1062,6 +1085,8 @@ while running:
                 box.y = -box_size
                 boulder_speeds = [random.uniform(0.75, max_boulder_speed) for _ in answer_boxes]
                 # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
+            boulder_angles = [0 for _ in answer_boxes]  # initial rotation for each boulder
+            boulder_rotation_speeds = [random.uniform(-5, 5) for _ in answer_boxes]  # degrees per frame
 
             game_over = False
             game_on = True
