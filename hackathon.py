@@ -109,7 +109,7 @@ except pygame.error as e:
 
 # Answer boxes
 box_size = 120
-box_y = 100
+box_y = -box_size
 answer_boxes = [
     pygame.Rect(100 + i * 160, box_y, box_size, box_size)
     for i in range(4)
@@ -159,11 +159,6 @@ class ImageQuitButton:  # Rename to avoid confusion with text quit button
             if self.rect.collidepoint(event.pos):
                 return True
         return False
-
-
-
-
-
 
 
 # Game Over Screen Functions
@@ -258,18 +253,12 @@ player_ufo = Ufo(300, 470, 200, 170)
 
 shots = [] 
 bullet_speed = 10
-
+boulder_speeds = [random.uniform(0.75, 1.75) for _ in answer_boxes]
+# boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
 # Game States
 running = True
 game_on = False
 game_over = False  # New state for game over screen
-
-# Load the music file (WAV)
-rickroll_sound = pygame.mixer.Sound("rickroll_proper.wav")
-rickroll_sound.set_volume(0.5)
-
-# Variable that keeps track if the music is playing
-rickroll_playing = False
 
 # Main Game Loop
 while running:
@@ -375,12 +364,18 @@ while running:
         
 
         # Answer Boxes (Boulders)
-        for i, box in enumerate(answer_boxes):
+        for i, box in enumerate(answer_boxes[:]):
+            box.y += boulder_speeds[i]
+            # box.x += boulder_drift[i]
+
             screen.blit(boulder_image, box.topleft)
             font = get_font_for_language(language)
             text_surface = font.render(answers[i], True, WHITE)
             text_rect = text_surface.get_rect(center=box.center)
             screen.blit(text_surface, text_rect)
+            if box.y > screen.get_height():
+                game_on = False
+                game_over = True
 
         # Draw UFO
         screen.blit(player_ufo.image, player_ufo.rect)
@@ -409,6 +404,11 @@ while running:
                             
                             # Clears all bullets
                             shots.clear()
+                            for i, box in enumerate(answer_boxes[:]):
+                                boulder_speeds = [random.uniform(0.75, 1.75) for _ in answer_boxes]
+                                # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
+                                box_y = random.randint(0, box_size)
+                                box.y = -box_y
 
                         else:
                             # Wrong answer: trigger game over
@@ -462,15 +462,12 @@ while running:
         # Draw image-based quit button
         game_over_quit_button.draw()
         play_again_button.draw()
-
-
-
-        # RESET GAME
         if play_again_button.check_click(event):
             
             rickroll_channel.stop()
             rickroll_playing = False # Stops music
 
+            # RESET GAME
             answer_counter = 0
             shots.clear()
 
@@ -480,6 +477,11 @@ while running:
 
             player_ufo.rect.x = 300
             player_ufo.rect.y = 470
+
+            for i, box in enumerate(answer_boxes[:]):
+                box.y = -box_size
+                boulder_speeds = [random.uniform(0.75, 1.75) for _ in answer_boxes]
+                # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
 
             game_over = False
             game_on = True
