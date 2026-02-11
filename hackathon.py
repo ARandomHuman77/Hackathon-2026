@@ -247,7 +247,6 @@ word_bank = {
     "Fake": ["假", "नकली", "Faux", "מזויף", "Falso", "போலி", "偽物", "가짜", "Falsch", "Falsk"],
     "Real": ["真的", "असली", "Vrai", "אמיתי", "Real", "உண்மையான", "本物", "진짜", "Echt", "Äkta"],
     "Bro": ["兄弟", "भाई", "Mec", "אחי", "Bro", "டா", "兄弟", "형", "Bruder", "Brorsan"],
-    "Sis": ["姐妹", "बहन", "Meuf", "אחותי", "Hermana", "டி", "姉妹", "누나", "Schwester", "Syrran"],
     "Dude": ["哥们", "यार", "Mec", "אחי", "Tío", "டூட்", "おい", "야", "Alter", "Snubbe"],
     "Shut up": ["闭嘴", "चुप रहो", "Tais-toi", "שתוק", "Cállate", "அமைதி", "黙れ", "닥쳐", "Halt den Mund", "Håll käften"],
 
