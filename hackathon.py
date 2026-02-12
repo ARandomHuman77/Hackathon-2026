@@ -594,10 +594,10 @@ def get_font_for_language(language):
         # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean]
 
 
-def draw_button(screen, rect, label, font, fill_color, text_color):
-    pygame.draw.rect(screen, fill_color, rect, border_radius=8)
+def draw_button(screen, rect, label, font, fill_colour, text_colour):
+    pygame.draw.rect(screen, fill_colour, rect, border_radius=8)
     pygame.draw.rect(screen, PURPLE, rect, width=2, border_radius=8)
-    text_surf = font.render(label, True, text_color)
+    text_surf = font.render(label, True, text_colour)
     text_rect = text_surf.get_rect(center=rect.center)
     screen.blit(text_surf, text_rect)
 
@@ -814,93 +814,93 @@ while running:
 
         # Menu Buttons (text-based)
         # Hover effect for start button
-        start_color = (180, 0, 180) if start_button_rect.collidepoint(mouse_pos) else PURPLE
-        draw_button(screen, start_button_rect, "Start", button_font, start_color, WHITE)
+        start_colour = (180, 0, 180) if start_button_rect.collidepoint(mouse_pos) else PURPLE
+        draw_button(screen, start_button_rect, "Start", button_font, start_colour, WHITE)
         
         # Hover effect for quit button
-        quit_color = (180, 0, 180) if quit_button_rect.collidepoint(mouse_pos) else PURPLE
-        draw_button(screen, quit_button_rect, "Quit", button_font, quit_color, WHITE)
+        quit_colour = (180, 0, 180) if quit_button_rect.collidepoint(mouse_pos) else PURPLE
+        draw_button(screen, quit_button_rect, "Quit", button_font, quit_colour, WHITE)
 
         # Languages buttons
         if "Chinese" in languages:
-            chinese_color = (25, 25, 25)
+            chinese_colour = (25, 25, 25)
         elif chinese_rect.collidepoint(mouse_pos):
-            chinese_color = (180, 0, 180)
+            chinese_colour = (180, 0, 180)
         else: 
-            chinese_color = PURPLE
-        draw_button(screen, chinese_rect, "Chinese", button_font, chinese_color, WHITE)
+            chinese_colour = PURPLE
+        draw_button(screen, chinese_rect, "Chinese", button_font, chinese_colour, WHITE)
 
         if "Hindi" in languages:
-            hindi_color = (25, 25, 25)
+            hindi_colour = (25, 25, 25)
         elif hindi_rect.collidepoint(mouse_pos):
-            hindi_color = (180, 0, 180)
+            hindi_colour = (180, 0, 180)
         else: 
-            hindi_color = PURPLE
-        draw_button(screen, hindi_rect, "Hindi", button_font, hindi_color, WHITE)
+            hindi_colour = PURPLE
+        draw_button(screen, hindi_rect, "Hindi", button_font, hindi_colour, WHITE)
 
         if "French" in languages:
-            french_color = (25, 25, 25)
+            french_colour = (25, 25, 25)
         elif french_rect.collidepoint(mouse_pos):
-            french_color = (180, 0, 180)
+            french_colour = (180, 0, 180)
         else: 
-            french_color = PURPLE
-        draw_button(screen, french_rect, "French", button_font, french_color, WHITE)
+            french_colour = PURPLE
+        draw_button(screen, french_rect, "French", button_font, french_colour, WHITE)
 
         if "Hebrew" in languages:
-            hebrew_color = (25, 25, 25)
+            hebrew_colour = (25, 25, 25)
         elif hebrew_rect.collidepoint(mouse_pos):
-            hebrew_color = (180, 0, 180)
+            hebrew_colour = (180, 0, 180)
         else: 
-            hebrew_color = PURPLE
-        draw_button(screen, hebrew_rect, "Hebrew", button_font, hebrew_color, WHITE)
+            hebrew_colour = PURPLE
+        draw_button(screen, hebrew_rect, "Hebrew", button_font, hebrew_colour, WHITE)
 
         if "Spanish" in languages:
-            spanish_color = (25, 25, 25)
+            spanish_colour = (25, 25, 25)
         elif spanish_rect.collidepoint(mouse_pos):
-            spanish_color = (180, 0, 180)
+            spanish_colour = (180, 0, 180)
         else: 
-            spanish_color = PURPLE
-        draw_button(screen, spanish_rect, "Spanish", button_font, spanish_color, WHITE)
+            spanish_colour = PURPLE
+        draw_button(screen, spanish_rect, "Spanish", button_font, spanish_colour, WHITE)
 
         if "Tamil" in languages:
-            tamil_color = (25, 25, 25)
+            tamil_colour = (25, 25, 25)
         elif tamil_rect.collidepoint(mouse_pos):
-            tamil_color = (180, 0, 180)
+            tamil_colour = (180, 0, 180)
         else: 
-            tamil_color = PURPLE
-        draw_button(screen, tamil_rect, "Tamil", button_font, tamil_color, WHITE)
+            tamil_colour = PURPLE
+        draw_button(screen, tamil_rect, "Tamil", button_font, tamil_colour, WHITE)
 
         if "Japanese" in languages:
-            japanese_color = (25, 25, 25)
+            japanese_colour = (25, 25, 25)
         elif japanese_rect.collidepoint(mouse_pos):
-            japanese_color = (180, 0, 180)
+            japanese_colour = (180, 0, 180)
         else: 
-            japanese_color = PURPLE
-        draw_button(screen, japanese_rect, "Japanese", button_font, japanese_color, WHITE)
+            japanese_colour = PURPLE
+        draw_button(screen, japanese_rect, "Japanese", button_font, japanese_colour, WHITE)
 
         if "Korean" in languages:
-            korean_color = (25, 25, 25)
+            korean_colour = (25, 25, 25)
         elif korean_rect.collidepoint(mouse_pos):
-            korean_color = (180, 0, 180)
+            korean_colour = (180, 0, 180)
         else: 
-            korean_color = PURPLE
-        draw_button(screen, korean_rect, "Korean", button_font, korean_color, WHITE)
+            korean_colour = PURPLE
+        draw_button(screen, korean_rect, "Korean", button_font, korean_colour, WHITE)
 
         if "German" in languages:
-            german_color = (25, 25, 25)
+            german_colour = (25, 25, 25)
         elif german_rect.collidepoint(mouse_pos):
-            german_color = (180, 0, 180)
+            german_colour = (180, 0, 180)
         else: 
-            german_color = PURPLE
-        draw_button(screen, german_rect, "German", button_font, german_color, WHITE)
+            german_colour = PURPLE
+        draw_button(screen, german_rect, "German", button_font, german_colour, WHITE)
 
         if "Swedish" in languages:
-            swedish_color = (25, 25, 25)
+            swedish_colour = (25, 25, 25)
         elif swedish_rect.collidepoint(mouse_pos):
-            swedish_color = (180, 0, 180)
+            swedish_colour = (180, 0, 180)
         else: 
-            swedish_color = PURPLE
-        draw_button(screen, swedish_rect, "Swedish", button_font, swedish_color, WHITE)
+            swedish_colour = PURPLE
+        draw_button(screen, swedish_rect, "Swedish", button_font, swedish_colour, WHITE)
 
         # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean, German, Swedish] 
 
@@ -1099,4 +1099,5 @@ while running:
 
 # Cleanup
 pygame.quit()
+
 sys.exit()
