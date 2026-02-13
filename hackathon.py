@@ -16,387 +16,49 @@ PURPLE = (128, 0, 128)
 RED = (255, 0, 0)
 
 
-# [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean]
-word_bank = {
-    "Hello": ["你好", "नमस्ते", "Bonjour", "שלום", "Hola", "வணக்கம்", "こんにちは", "안녕하세요", "Hallo", "Hej"],
-    "Goodbye": ["再见", "अलविदा", "Au revoir", "להתראות", "Adiós", "பிரியாவிடை", "さようなら", "안녕히 가세요", "Auf Wiedersehen", "Adjö"],
-    "Please": ["请", "कृपया", "S'il vous plaît", "בבקשה", "Por favor", "தயவு செய்து", "お願いします", "제발", "Bitte", "Snälla"],
-    "Thank you": ["谢谢", "धन्यवाद", "Merci", "תודה", "Gracias", "நன்றி", "ありがとう", "감사합니다", "Danke", "Tack"],
-    "Yes": ["是", "हाँ", "Oui", "כן", "Sí", "ஆம்", "はい", "네", "Ja", "Ja"],
-    "No": ["不", "नहीं", "Non", "לא", "No", "இல்லை", "いいえ", "아니요", "Nein", "Nej"],
-    "Excuse me": ["打扰一下", "माफ़ कीजिए", "Excusez-moi", "סליחה", "Perdón", "மன்னிக்கவும்", "すみません", "실례합니다", "Entschuldigung", "Ursäkta"],
-    "Sorry": ["对不起", "माफ़ करना", "Désolé", "מצטער", "Lo siento", "மன்னிக்கவும்", "ごめんなさい", "죄송합니다", "Entschuldigung", "Förlåt"],
+# [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean, German, Swedish]
 
-    "Friend": ["朋友", "दोस्त", "Ami", "חבר", "Amigo", "நண்பர்", "友達", "친구", "Freund", "Vän"],
-    "Family": ["家庭", "परिवार", "Famille", "משפחה", "Familia", "குடும்பம்", "家族", "가족", "Familie", "Familj"],
-    "Love": ["爱", "प्यार", "Amour", "אהבה", "Amor", "அன்பு", "愛", "사랑", "Liebe", "Kärlek"],
-    "Food": ["食物", "भोजन", "Nourriture", "אוכל", "Comida", "உணவு", "食べ物", "음식", "Essen", "Mat"],
-    "Water": ["水", "पानी", "Eau", "מים", "Agua", "தண்ணீர்", "水", "물", "Wasser", "Vatten"],
-    "House": ["房子", "घर", "Maison", "בית", "Casa", "வீடு", "家", "집", "Haus", "Hus"],
-    "School": ["学校", "स्कूल", "École", "בית ספר", "Escuela", "பள்ளி", "学校", "학교", "Schule", "Skola"],
-    "Work": ["工作", "काम", "Travail", "עבודה", "Trabajo", "வேலை", "仕事", "일", "Arbeit", "Arbete"],
-    "Money": ["钱", "पैसा", "Argent", "כסף", "Dinero", "பணம்", "お金", "돈", "Geld", "Pengar"],
-    "Time": ["时间", "समय", "Temps", "זמן", "Tiempo", "நேரம்", "時間", "시간", "Zeit", "Tid"],
-
-    "Day": ["天", "दिन", "Jour", "יום", "Día", "நாள்", "日", "날", "Tag", "Dag"],
-    "Night": ["夜", "रात", "Nuit", "לילה", "Noche", "இரவு", "夜", "밤", "Nacht", "Natt"],
-    "Sun": ["太阳", "सूरज", "Soleil", "שמש", "Sol", "சூரியன்", "太陽", "태양", "Sonne", "Sol"],
-    "Moon": ["月亮", "चाँद", "Lune", "ירח", "Luna", "நிலா", "月", "달", "Mond", "Måne"],
-    "Star": ["星星", "तारा", "Étoile", "כוכב", "Estrella", "நட்சத்திரம்", "星", "별", "Stern", "Stjärna"],
-    "Dog": ["狗", "कुत्ता", "Chien", "כלב", "Perro", "நாய்", "犬", "개", "Hund", "Hund"],
-    "Cat": ["猫", "बिल्ली", "Chat", "חתול", "Gato", "பூனை", "猫", "고양이", "Katze", "Katt"],
-    "Car": ["车", "गाड़ी", "Voiture", "מכונית", "Coche", "கார்", "車", "자동차", "Auto", "Bil"],
-    "Book": ["书", "किताब", "Livre", "ספר", "Libro", "புத்தகம்", "本", "책", "Buch", "Bok"],
-    "Pen": ["笔", "कलम", "Stylo", "עט", "Bolígrafo", "பேனா", "ペン", "펜", "Stift", "Penna"],
-
-    "Chair": ["椅子", "कुर्सी", "Chaise", "כיסא", "Silla", "நாற்காலி", "椅子", "의자", "Stuhl", "Stol"],
-    "Table": ["桌子", "मेज़", "Table", "שולחן", "Mesa", "மேசை", "テーブル", "탁자", "Tisch", "Bord"],
-    "Window": ["窗户", "खिड़की", "Fenêtre", "חלון", "Ventana", "ஜன்னல்", "窓", "창문", "Fenster", "Fönster"],
-    "Door": ["门", "दरवाज़ा", "Porte", "דלת", "Puerta", "கதவு", "ドア", "문", "Tür", "Dörr"],
-    "City": ["城市", "शहर", "Ville", "עיר", "Ciudad", "நகரம்", "都市", "도시", "Stadt", "Stad"],
-    "Country": ["国家", "देश", "Pays", "מדינה", "País", "நாடு", "国", "나라", "Land", "Land"],
-    "Language": ["语言", "भाषा", "Langue", "שפה", "Idioma", "மொழி", "言語", "언어", "Sprache", "Språk"],
-    "Computer": ["电脑", "कंप्यूटर", "Ordinateur", "מחשב", "Computadora", "கணினி", "コンピューター", "컴퓨터", "Computer", "Dator"],
-    "Phone": ["电话", "फ़ोन", "Téléphone", "טלפון", "Teléfono", "தொலைபேசி", "電話", "전화", "Telefon", "Telefon"],
-
-    "Music": ["音乐", "संगीत", "Musique", "מוזיקה", "Música", "இசை", "音楽", "음악", "Musik", "Musik"],
-    "Movie": ["电影", "फ़िल्म", "Film", "סרט", "Película", "திரைப்படம்", "映画", "영화", "Film", "Film"],
-    "Game": ["游戏", "खेल", "Jeu", "משחק", "Juego", "விளையாட்டு", "ゲーム", "게임", "Spiel", "Spel"],
-    "Happy": ["快乐", "खुश", "Heureux", "שמח", "Feliz", "மகிழ்ச்சி", "幸せ", "행복한", "Glücklich", "Glad"],
-    "Sad": ["难过", "उदास", "Triste", "עצוב", "Triste", "சோகம்", "悲しい", "슬픈", "Traurig", "Ledsen"],
-    "Big": ["大", "बड़ा", "Grand", "גדול", "Grande", "பெரியது", "大きい", "큰", "Groß", "Stor"],
-    "Small": ["小", "छोटा", "Petit", "קטן", "Pequeño", "சிறியது", "小さい", "작은", "Klein", "Liten"],
-    "Hot": ["热", "गर्म", "Chaud", "חם", "Caliente", "சூடு", "暑い", "더운", "Heiß", "Varm"],
-    "Cold": ["冷", "ठंडा", "Froid", "קר", "Frío", "குளிர்", "寒い", "추운", "Kalt", "Kall"],
-    "Fast": ["快", "तेज़", "Rapide", "מהיר", "Rápido", "வேகமான", "速い", "빠른", "Schnell", "Snabb"],
-
-    "Teacher": ["老师", "शिक्षक", "Professeur", "מורה", "Profesor", "ஆசிரியர்", "先生", "선생님", "Lehrer", "Lärare"],
-    "Student": ["学生", "छात्र", "Étudiant", "תלמיד", "Estudiante", "மாணவர்", "学生", "학생", "Student", "Student"],
-    "Doctor": ["医生", "डॉक्टर", "Médecin", "רופא", "Médico", "மருத்துவர்", "医者", "의사", "Arzt", "Läkare"],
-    "Nurse": ["护士", "नर्स", "Infirmier", "אחות", "Enfermero", "செவிலியர்", "看護師", "간호사", "Krankenschwester", "Sjuksköterska"],
-    "Engineer": ["工程师", "इंजीनियर", "Ingénieur", "מהנדס", "Ingeniero", "பொறியாளர்", "エンジニア", "엔지니어", "Ingenieur", "Ingenjör"],
-    "Artist": ["艺术家", "कलाकार", "Artiste", "אמן", "Artista", "கலைஞர்", "芸術家", "예술가", "Künstler", "Konstnär"],
-    "Driver": ["司机", "चालक", "Conducteur", "נהג", "Conductor", "ஓட்டுநர்", "運転手", "운전사", "Fahrer", "Förare"],
-    "Farmer": ["农民", "किसान", "Agriculteur", "חקלאי", "Agricultor", "விவசாயி", "農家", "농부", "Landwirt", "Bonde"],
-    "Police": ["警察", "पुलिस", "Police", "משטרה", "Policía", "காவலர்", "警察", "경찰", "Polizei", "Polis"],
-    "Fire": ["火", "आग", "Feu", "אש", "Fuego", "நெருப்பு", "火", "불", "Feuer", "Eld"],
-
-    "Air": ["空气", "हवा", "Air", "אוויר", "Aire", "காற்று", "空気", "공기", "Luft", "Luft"],
-    "Earth": ["地球", "पृथ्वी", "Terre", "אדמה", "Tierra", "பூமி", "地球", "지구", "Erde", "Jord"],
-    "Rain": ["雨", "बारिश", "Pluie", "גשם", "Lluvia", "மழை", "雨", "비", "Regen", "Regn"],
-    "Snow": ["雪", "बर्फ", "Neige", "שלג", "Nieve", "பனி", "雪", "눈", "Schnee", "Snö"],
-    "Wind": ["风", "हवा", "Vent", "רוח", "Viento", "காற்று", "風", "바람", "Wind", "Vind"],
-    "Mountain": ["山", "पहाड़", "Montagne", "הר", "Montaña", "மலை", "山", "산", "Berg", "Berg"],
-    "River": ["河", "नदी", "Rivière", "נהר", "Río", "ஆறு", "川", "강", "Fluss", "Flod"],
-    "Ocean": ["海洋", "महासागर", "Océan", "אוקיינוס", "Océano", "கடல்", "海洋", "바다", "Ozean", "Hav"],
-    "Forest": ["森林", "जंगल", "Forêt", "יער", "Bosque", "காடு", "森", "숲", "Wald", "Skog"],
-    "Island": ["岛", "द्वीप", "Île", "אי", "Isla", "தீவு", "島", "섬", "Insel", "Ö"],
-
-    "Breakfast": ["早餐", "नाश्ता", "Petit-déjeuner", "ארוחת בוקר", "Desayuno", "காலை உணவு", "朝食", "아침식사", "Frühstück", "Frukost"],
-    "Lunch": ["午餐", "दोपहर का भोजन", "Déjeuner", "ארוחת צהריים", "Almuerzo", "மதிய உணவு", "昼食", "점심식사", "Mittagessen", "Lunch"],
-    "Dinner": ["晚餐", "रात का खाना", "Dîner", "ארוחת ערב", "Cena", "இரவு உணவு", "夕食", "저녁식사", "Abendessen", "Middag"],
-    "Coffee": ["咖啡", "कॉफ़ी", "Café", "קפה", "Café", "காபி", "コーヒー", "커피", "Kaffee", "Kaffe"],
-    "Tea": ["茶", "चाय", "Thé", "תה", "Té", "தேநீர்", "お茶", "차", "Tee", "Te"],
-    "Sugar": ["糖", "चीनी", "Sucre", "סוכר", "Azúcar", "சர்க்கரை", "砂糖", "설탕", "Zucker", "Socker"],
-    "Salt": ["盐", "नमक", "Sel", "מלח", "Sal", "உப்பு", "塩", "소금", "Salz", "Salt"],
-    "Bread": ["面包", "रोटी", "Pain", "לחם", "Pan", "ரொட்டி", "パン", "빵", "Brot", "Bröd"],
-    "Rice": ["米饭", "चावल", "Riz", "אורז", "Arroz", "அரிசி", "ご飯", "쌀", "Reis", "Ris"],
-    "Fruit": ["水果", "फल", "Fruit", "פרי", "Fruta", "பழம்", "果物", "과일", "Obst", "Frukt"],
-
-    "Vegetable": ["蔬菜", "सब्ज़ी", "Légume", "ירק", "Verdura", "காய்கறி", "野菜", "채소", "Gemüse", "Grönsak"],
-    "Hospital": ["医院", "अस्पताल", "Hôpital", "בית חולים", "Hospital", "மருத்துவமனை", "病院", "병원", "Krankenhaus", "Sjukhus"],
-    "Airport": ["机场", "हवाई अड्डा", "Aéroport", "שדה תעופה", "Aeropuerto", "விமான நிலையம்", "空港", "공항", "Flughafen", "Flygplats"],
-    "Train": ["火车", "रेल गाड़ी", "Train", "רכבת", "Tren", "ரயில்", "電車", "기차", "Zug", "Tåg"],
-    "Bus": ["公交车", "बस", "Bus", "אוטובוס", "Autobús", "பேருந்து", "バス", "버스", "Bus", "Buss"],
-    "Ticket": ["票", "टिकट", "Billet", "כרטיס", "Boleto", "டிக்கெட்", "切符", "표", "Ticket", "Biljett"],
-    "Market": ["市场", "बाज़ार", "Marché", "שוק", "Mercado", "சந்தை", "市場", "시장", "Markt", "Marknad"],
-    "Store": ["商店", "दुकान", "Magasin", "חנות", "Tienda", "கடை", "店", "가게", "Geschäft", "Butik"],
-    "Restaurant": ["餐厅", "रेस्तरां", "Restaurant", "מסעדה", "Restaurante", "உணவகம்", "レストラン", "식당", "Restaurant", "Restaurang"],
-    "Hotel": ["酒店", "होटल", "Hôtel", "מלון", "Hotel", "ஹோட்டல்", "ホテル", "호텔", "Hotel", "Hotell"],
-
-    "What": ["什么", "क्या", "Quoi", "מה", "Qué", "என்ன", "何", "무엇", "Was", "Vad"],
-    "Who": ["谁", "कौन", "Qui", "מי", "Quién", "யார்", "誰", "누구", "Wer", "Vem"],
-    "Where": ["哪里", "कहाँ", "Où", "איפה", "Dónde", "எங்கே", "どこ", "어디", "Wo", "Var"],
-    "When": ["什么时候", "कब", "Quand", "מתי", "Cuándo", "எப்போது", "いつ", "언제", "Wann", "När"],
-    "Why": ["为什么", "क्यों", "Pourquoi", "למה", "Por qué", "ஏன்", "なぜ", "왜", "Warum", "Varför"],
-    "How": ["怎么", "कैसे", "Comment", "איך", "Cómo", "எப்படி", "どう", "어떻게", "Wie", "Hur"],
-    "Which": ["哪个", "कौन सा", "Lequel", "איזה", "Cuál", "எது", "どれ", "어느", "Welcher", "Vilken"],
-    "How much": ["多少", "कितना", "Combien", "כמה", "Cuánto", "எவ்வளவு", "いくら", "얼마", "Wie viel", "Hur mycket"],
-    "How many": ["多少", "कितने", "Combien", "כמה", "Cuántos", "எத்தனை", "いくつ", "몇", "Wie viele", "Hur många"],
-    "Name": ["名字", "नाम", "Nom", "שם", "Nombre", "பெயர்", "名前", "이름", "Name", "Namn"],
-
-    "Address": ["地址", "पता", "Adresse", "כתובת", "Dirección", "முகவரி", "住所", "주소", "Adresse", "Adress"],
-    "Age": ["年龄", "उम्र", "Âge", "גיל", "Edad", "வயது", "年齢", "나이", "Alter", "Ålder"],
-    "Birthday": ["生日", "जन्मदिन", "Anniversaire", "יום הולדת", "Cumpleaños", "பிறந்தநாள்", "誕生日", "생일", "Geburtstag", "Födelsedag"],
-    "Number": ["号码", "नंबर", "Numéro", "מספר", "Número", "எண்", "番号", "번호", "Nummer", "Nummer"],
-    "Today": ["今天", "आज", "Aujourd'hui", "היום", "Hoy", "இன்று", "今日", "오늘", "Heute", "Idag"],
-    "Tomorrow": ["明天", "कल", "Demain", "מחר", "Mañana", "நாளை", "明日", "내일", "Morgen", "Imorgon"],
-    "Yesterday": ["昨天", "कल", "Hier", "אתמול", "Ayer", "நேற்று", "昨日", "어제", "Gestern", "Igår"],
-    "Now": ["现在", "अभी", "Maintenant", "עכשיו", "Ahora", "இப்போது", "今", "지금", "Jetzt", "Nu"],
-    "Later": ["以后", "बाद में", "Plus tard", "אחר כך", "Más tarde", "பிறகு", "後で", "나중에", "Später", "Senare"],
-    "Early": ["早", "जल्दी", "Tôt", "מוקדם", "Temprano", "அதிகாலை", "早い", "이른", "Früh", "Tidigt"],
-
-    "Late": ["晚", "देर", "Tard", "מאוחר", "Tarde", "தாமதம்", "遅い", "늦은", "Spät", "Sent"],
-    "Open": ["打开", "खोलना", "Ouvrir", "לפתוח", "Abrir", "திறக்க", "開ける", "열다", "Öffnen", "Öppna"],
-    "Close": ["关闭", "बंद करना", "Fermer", "לסגור", "Cerrar", "மூட", "閉める", "닫다", "Schließen", "Stänga"],
-    "Start": ["开始", "शुरू करना", "Commencer", "להתחיל", "Empezar", "தொடங்க", "始める", "시작하다", "Starten", "Starta"],
-    "Finish": ["结束", "खत्म करना", "Finir", "לסיים", "Terminar", "முடிக்க", "終わる", "끝내다", "Beenden", "Avsluta"],
-    "Help": ["帮助", "मदद", "Aide", "עזרה", "Ayuda", "உதவி", "助け", "도움", "Hilfe", "Hjälp"],
-    "Call": ["打电话", "फोन करना", "Appeler", "להתקשר", "Llamar", "அழைக்க", "電話する", "전화하다", "Anrufen", "Ringa"],
-    "Wait": ["等", "इंतज़ार करना", "Attendre", "לחכות", "Esperar", "காத்திருக்க", "待つ", "기다리다", "Warten", "Vänta"],
-    "Understand": ["理解", "समझना", "Comprendre", "להבין", "Entender", "புரிந்துகொள்ள", "理解する", "이해하다", "Verstehen", "Förstå"],
-    "Repeat": ["重复", "दोहराना", "Répéter", "לחזור", "Repetir", "மீண்டும் சொல்ல", "繰り返す", "반복하다", "Wiederholen", "Upprepa"],
-
-    "Speak": ["说", "बोलना", "Parler", "לדבר", "Hablar", "பேச", "話す", "말하다", "Sprechen", "Tala"],
-    "Listen": ["听", "सुनना", "Écouter", "להקשיב", "Escuchar", "கேட்க", "聞く", "듣다", "Hören", "Lyssna"],
-    "Read": ["读", "पढ़ना", "Lire", "לקרוא", "Leer", "படிக்க", "読む", "읽다", "Lesen", "Läsa"],
-    "Write": ["写", "लिखना", "Écrire", "לכתוב", "Escribir", "எழுத", "書く", "쓰다", "Schreiben", "Skriva"],
-    "Buy": ["买", "खरीदना", "Acheter", "לקנות", "Comprar", "வாங்க", "買う", "사다", "Kaufen", "Köpa"],
-    "Sell": ["卖", "बेचना", "Vendre", "למכור", "Vender", "விற்க", "売る", "팔다", "Verkaufen", "Sälja"],
-    "Pay": ["支付", "भुगतान करना", "Payer", "לשלם", "Pagar", "செலுத்த", "払う", "지불하다", "Bezahlen", "Betala"],
-    "Cost": ["花费", "कीमत", "Coût", "עלות", "Costo", "செலவு", "費用", "비용", "Kosten", "Kosta"],
-    "Need": ["需要", "ज़रूरत", "Besoin", "צורך", "Necesitar", "தேவை", "必要", "필요", "Brauchen", "Behöva"],
-    "Want": ["想要", "चाहना", "Vouloir", "רוצה", "Querer", "விரும்ப", "欲しい", "원하다", "Wollen", "Vilja"],
-
-    "Like": ["喜欢", "पसंद करना", "Aimer", "לאהוב", "Gustar", "பிடிக்கும்", "好き", "좋아하다", "Mögen", "Gilla"],
-    "Dislike": ["不喜欢", "नापसंद करना", "Détester", "לא אוהב", "No gustar", "பிடிக்காது", "嫌い", "싫어하다", "Nicht mögen", "Ogilla"],
-    "Different": ["不同", "अलग", "Différent", "שונה", "Diferente", "வேறுபட்ட", "違う", "다른", "Verschieden", "Annorlunda"],
-    "Same": ["相同", "समान", "Même", "אותו", "Mismo", "அதே", "同じ", "같은", "Gleich", "Samma"],
-    "Easy": ["容易", "आसान", "Facile", "קל", "Fácil", "எளிது", "簡単", "쉬운", "Einfach", "Enkel"],
-    "Difficult": ["困难", "मुश्किल", "Difficile", "קשה", "Difícil", "கடினம்", "難しい", "어려운", "Schwierig", "Svår"],
-    "Right": ["正确", "सही", "Correct", "נכון", "Correcto", "சரி", "正しい", "맞다", "Richtig", "Rätt"],
-    "Wrong": ["错误", "गलत", "Faux", "לא נכון", "Incorrecto", "தவறு", "間違い", "틀리다", "Falsch", "Fel"],
-    "Here": ["这里", "यहाँ", "Ici", "כאן", "Aquí", "இங்கே", "ここ", "여기", "Hier", "Här"],
-    "There": ["那里", "वहाँ", "Là-bas", "שם", "Allí", "அங்கே", "そこ", "거기", "Dort", "Där"],
-
-    "Because": ["因为", "क्योंकि", "Parce que", "כי", "Porque", "ஏனெனில்", "なぜなら", "왜냐하면", "Weil", "Eftersom"],
-    "But": ["但是", "लेकिन", "Mais", "אבל", "Pero", "ஆனால்", "でも", "하지만", "Aber", "Men"],
-    "And": ["和", "और", "Et", "ו", "Y", "மற்றும்", "そして", "그리고", "Und", "Och"],
-    "Or": ["或者", "या", "Ou", "או", "O", "அல்லது", "または", "또는", "Oder", "Eller"],
-    "If": ["如果", "अगर", "Si", "אם", "Si", "என்றால்", "もし", "만약", "Wenn", "Om"],
-    "Maybe": ["也许", "शायद", "Peut-être", "אולי", "Quizás", "ஒருவேளை", "たぶん", "아마도", "Vielleicht", "Kanske"],
-    "Always": ["总是", "हमेशा", "Toujours", "תמיד", "Siempre", "எப்போதும்", "いつも", "항상", "Immer", "Alltid"],
-    "Never": ["从不", "कभी नहीं", "Jamais", "לעולם לא", "Nunca", "ஒருபோதும் இல்லை", "決して", "절대", "Niemals", "Aldrig"],
-    "Sometimes": ["有时", "कभी-कभी", "Parfois", "לפעמים", "A veces", "சில நேரங்களில்", "時々", "가끔", "Manchmal", "Ibland"],
-    "Usually": ["通常", "आमतौर पर", "Habituellement", "בדרך כלל", "Normalmente", "பொதுவாக", "普通", "보통", "Normalerweise", "Vanligtvis"],
-
-    "Before": ["之前", "पहले", "Avant", "לפני", "Antes", "முன்", "前に", "전에", "Vor", "Före"],
-    "After": ["之后", "बाद में", "Après", "אחרי", "Después", "பிறகு", "後で", "후에", "Nach", "Efter"],
-    "Inside": ["里面", "अंदर", "À l'intérieur", "בפנים", "Dentro", "உள்ளே", "中", "안에", "Innen", "Inuti"],
-    "Outside": ["外面", "बाहर", "À l'extérieur", "בחוץ", "Afuera", "வெளியே", "外", "밖에", "Außen", "Utanför"],
-    "Near": ["附近", "पास", "Près", "קרוב", "Cerca", "அருகில்", "近く", "가까이", "Nah", "Nära"],
-    "Far": ["远", "दूर", "Loin", "רחוק", "Lejos", "தொலைவில்", "遠い", "멀리", "Weit", "Långt"],
-    "Left": ["左", "बायाँ", "Gauche", "שמאל", "Izquierda", "இடது", "左", "왼쪽", "Links", "Vänster"],
-    "Right (direction)": ["右", "दायाँ", "Droite", "ימין", "Derecha", "வலது", "右", "오른쪽", "Rechts", "Höger"],
-    "Straight": ["直走", "सीधा", "Tout droit", "ישר", "Recto", "நேராக", "まっすぐ", "직진", "Geradeaus", "Rakt fram"],
-    "Around": ["周围", "आसपास", "Autour", "מסביב", "Alrededor", "சுற்றிலும்", "周り", "주변", "Herum", "Runt"],
-
-    "Everything": ["一切", "सब कुछ", "Tout", "הכול", "Todo", "எல்லாம்", "すべて", "모든 것", "Alles", "Allt"],
-    "Nothing": ["什么都没有", "कुछ नहीं", "Rien", "כלום", "Nada", "எதுவும் இல்லை", "何もない", "아무것도", "Nichts", "Ingenting"],
-    "Something": ["某事", "कुछ", "Quelque chose", "משהו", "Algo", "ஏதாவது", "何か", "무언가", "Etwas", "Något"],
-    "Someone": ["某人", "कोई", "Quelqu'un", "מישהו", "Alguien", "யாராவது", "誰か", "누군가", "Jemand", "Någon"],
-    "Everyone": ["每个人", "सब लोग", "Tout le monde", "כולם", "Todos", "அனைவரும்", "みんな", "모두", "Jeder", "Alla"],
-    "All": ["所有", "सब", "Tous", "כל", "Todo", "அனைத்து", "全部", "모든", "Alle", "Alla"],
-    "More": ["更多", "अधिक", "Plus", "יותר", "Más", "மேலும்", "もっと", "더", "Mehr", "Mer"],
-    "Less": ["更少", "कम", "Moins", "פחות", "Menos", "குறைவு", "より少ない", "덜", "Weniger", "Mindre"],
-    "Most": ["大多数", "अधिकांश", "La plupart", "רוב", "La mayoría", "பெரும்பாலான", "ほとんど", "대부분", "Die meisten", "De flesta"],
-    "Few": ["很少", "कुछ", "Peu", "מעט", "Pocos", "சில", "少し", "몇", "Wenige", "Få"],
-
-    "First": ["第一", "पहला", "Premier", "ראשון", "Primero", "முதல்", "最初", "첫째", "Erste", "Första"],
-    "Second": ["第二", "दूसरा", "Deuxième", "שני", "Segundo", "இரண்டாம்", "二番目", "둘째", "Zweite", "Andra"],
-    "Last": ["最后", "आखिरी", "Dernier", "אחרון", "Último", "கடைசி", "最後", "마지막", "Letzte", "Sista"],
-    "Next": ["下一个", "अगला", "Suivant", "הבא", "Siguiente", "அடுத்த", "次", "다음", "Nächste", "Nästa"],
-    "Important": ["重要", "महत्वपूर्ण", "Important", "חשוב", "Importante", "முக்கியம்", "重要", "중요한", "Wichtig", "Viktig"],
-    "Possible": ["可能", "संभव", "Possible", "אפשרי", "Posible", "சாத்தியம்", "可能", "가능한", "Möglich", "Möjlig"],
-    "Sure": ["确定", "पक्का", "Sûr", "בטוח", "Seguro", "நிச்சயம்", "確か", "확실한", "Sicher", "Säker"],
-    "Ready": ["准备好", "तैयार", "Prêt", "מוכן", "Listo", "தயார்", "準備ができた", "준비된", "Bereit", "Redo"],
-    "Busy": ["忙", "व्यस्त", "Occupé", "עסוק", "Ocupado", "பிஸி", "忙しい", "바쁜", "Beschäftigt", "Upptagen"],
-    "Free (available)": ["有空", "खाली", "Libre", "פנוי", "Libre", "வெற்று", "暇", "한가한", "Frei", "Ledig"],
-
-    "Problem": ["问题", "समस्या", "Problème", "בעיה", "Problema", "பிரச்சனை", "問題", "문제", "Problem", "Problem"],
-    "Idea": ["主意", "विचार", "Idée", "רעיון", "Idea", "யோசனை", "アイデア", "아이디어", "Idee", "Idé"],
-    "Reason": ["原因", "कारण", "Raison", "סיבה", "Razón", "காரணம்", "理由", "이유", "Grund", "Anledning"],
-    "Example": ["例子", "उदाहरण", "Exemple", "דוגמה", "Ejemplo", "உதாரணம்", "例", "예", "Beispiel", "Exempel"],
-    "Truth": ["真相", "सच", "Vérité", "אמת", "Verdad", "உண்மை", "真実", "진실", "Wahrheit", "Sanning"],
-    "Lie": ["谎言", "झूठ", "Mensonge", "שקר", "Mentira", "பொய்", "嘘", "거짓말", "Lüge", "Lögn"],
-    "Message": ["消息", "संदेश", "Message", "הודעה", "Mensaje", "செய்தி", "メッセージ", "메시지", "Nachricht", "Meddelande"],
-    "Information": ["信息", "जानकारी", "Information", "מידע", "Información", "தகவல்", "情報", "정보", "Information", "Information"],
-    "Plan": ["计划", "योजना", "Plan", "תוכנית", "Plan", "திட்டம்", "計画", "계획", "Plan", "Plan"],
-    "Goal": ["目标", "लक्ष्य", "Objectif", "מטרה", "Meta", "இலக்கு", "目標", "목표", "Ziel", "Mål"],
-
-    "Cool": ["酷", "कूल", "Cool", "מגניב", "Guay", "சூப்பர்", "かっこいい", "멋있어", "Cool", "Cool"],
-    "Awesome": ["太棒了", "कमाल", "Génial", "מעולה", "Genial", "அருமை", "最高", "대박", "Großartig", "Grymt"],
-    "Wow": ["哇", "वाह", "Wouah", "וואו", "Guau", "ஆஹா", "わあ", "와", "Wow", "Wow"],
-    "No way!": ["不会吧", "अरे नहीं", "Pas possible", "אין מצב", "¡No puede ser!", "அப்படி இல்லை", "まさか", "설마", "Auf keinen Fall!", "Ingen chans!"],
-    "Seriously?": ["真的？", "सच में?", "Sérieux ?", "באמת?", "¿En serio?", "உண்மையா?", "マジで？", "진짜?", "Ernsthaft?", "Seriöst?"],
-    "My bad": ["我的错", "मेरी गलती", "Ma faute", "טעות שלי", "Fue mi culpa", "என் தவறு", "俺のミス", "내 실수야", "Mein Fehler", "Mitt fel"],
-    "Whatever": ["随便", "जो भी", "Comme tu veux", "מה שתגיד", "Lo que sea", "எதுவும் சரி", "どうでもいい", "마음대로", "Egal", "Spelar ingen roll"],
-    "Deal": ["成交", "पक्का", "Marché conclu", "סגור", "Trato hecho", "ஒப்பந்தம்", "決まり", "콜", "Abgemacht", "Deal"],
-
-    "Mess": ["乱七八糟", "गड़बड़", "Bazaar", "בלגן", "Desastre", "குழப்பம்", "めちゃくちゃ", "엉망", "Chaos", "Röra"],
-    "Creepy": ["吓人", "डरावना", "Flippant", "מפחיד", "Raro", "பயங்கரம்", "気持ち悪い", "소름 끼치는", "Unheimlich", "Läskig"],
-    "Weird": ["奇怪", "अजीब", "Bizarre", "מוזר", "Raro", "விசித்திரம்", "変", "이상해", "Seltsam", "Konstig"],
-    "Lame": ["无聊", "बेकार", "Nul", "דפוק", "Aburrido", "சலிப்பு", "ダサい", "별로야", "Lahm", "Lam"],
-    "Shy": ["害羞", "शर्मीला", "Timide", "ביישן", "Tímido", "வெட்கம்", "恥ずかしい", "수줍은", "Schüchtern", "Blyg"],
-    "Lazy": ["懒", "आलसी", "Paresseux", "עצלן", "Perezoso", "சோம்பேறி", "怠け者", "게으른", "Faul", "Lat"],
-    "Boring": ["无聊", "उबाऊ", "Ennuyeux", "משעמם", "Aburrido", "சலிப்பான", "つまらない", "지루한", "Langweilig", "Tråkig"],
-    "Annoying": ["烦人", "परेशान करने वाला", "Énervant", "מעצבן", "Molesto", "எரிச்சலான", "うざい", "짜증나는", "Nervig", "Irriterande"],
-    "Gross": ["恶心", "गंदा", "Dégoûtant", "מגעיל", "Asqueroso", "அருவருப்பு", "気持ち悪い", "역겨워", "Eklig", "Äcklig"],
-
-    "Epic": ["史诗级", "महाकाव्य जैसा", "Épique", "אפי", "Épico", "மிக பெரிய", "壮大", "레전드", "Episch", "Episkt"],
-    "Fake": ["假", "नकली", "Faux", "מזויף", "Falso", "போலி", "偽物", "가짜", "Falsch", "Falsk"],
-    "Real": ["真的", "असली", "Vrai", "אמיתי", "Real", "உண்மையான", "本物", "진짜", "Echt", "Äkta"],
-    "Bro": ["兄弟", "भाई", "Mec", "אחי", "Bro", "டா", "兄弟", "형", "Bruder", "Brorsan"],
-    "Dude": ["哥们", "यार", "Mec", "אחי", "Tío", "டூட்", "おい", "야", "Alter", "Snubbe"],
-    "Shut up": ["闭嘴", "चुप रहो", "Tais-toi", "שתוק", "Cállate", "அமைதி", "黙れ", "닥쳐", "Halt den Mund", "Håll käften"],
-
-    "Go": ["去", "जाना", "Aller", "ללכת", "Ir", "போக", "行く", "가다", "Gehen", "Gå"],
-    "Come": ["来", "आना", "Venir", "לבוא", "Venir", "வர", "来る", "오다", "Kommen", "Komma"],
-    "Take": ["拿", "लेना", "Prendre", "לקחת", "Tomar", "எடுக்க", "取る", "가져가다", "Nehmen", "Ta"],
-    "Bring": ["带来", "लाना", "Apporter", "להביא", "Traer", "கொண்டு வர", "持ってくる", "가져오다", "Bringen", "Ta med"],
-    "Give": ["给", "देना", "Donner", "לתת", "Dar", "கொடுக்க", "あげる", "주다", "Geben", "Ge"],
-    "Find": ["找到", "ढूँढना", "Trouver", "למצוא", "Encontrar", "கண்டுபிடிக்க", "見つける", "찾다", "Finden", "Hitta"],
-    "Look": ["看", "देखना", "Regarder", "להסתכל", "Mirar", "பார்க்க", "見る", "보다", "Schauen", "Titta"],
-    "Watch": ["观看", "देखना", "Observer", "לצפות", "Ver", "கவனிக்க", "観る", "지켜보다", "Ansehen", "Titta på"],
-    "Use": ["使用", "उपयोग करना", "Utiliser", "להשתמש", "Usar", "பயன்படுத்த", "使う", "사용하다", "Benutzen", "Använda"],
-    "Try": ["尝试", "कोशिश करना", "Essayer", "לנסות", "Intentar", "முயற்சிக்க", "試す", "시도하다", "Versuchen", "Försöka"],
-
-    "Ask": ["问", "पूछना", "Demander", "לשאול", "Preguntar", "கேட்க", "聞く", "묻다", "Fragen", "Fråga"],
-    "Answer (verb)": ["回答", "उत्तर देना", "Répondre", "לענות", "Responder", "பதில் அளிக்க", "答える", "대답하다", "Antworten", "Svara"],
-    "Feel": ["感觉", "महसूस करना", "Sentir", "להרגיש", "Sentir", "உணர", "感じる", "느끼다", "Fühlen", "Känna"],
-    "Think": ["认为", "सोचना", "Penser", "לחשוב", "Pensar", "சிந்திக்க", "考える", "생각하다", "Denken", "Tänka"],
-    "Believe": ["相信", "विश्वास करना", "Croire", "להאמין", "Creer", "நம்ப", "信じる", "믿다", "Glauben", "Tro"],
-    "Remember": ["记得", "याद रखना", "Se souvenir", "לזכור", "Recordar", "நினைவில் கொள்", "覚える", "기억하다", "Sich erinnern", "Komma ihåg"],
-    "Forget": ["忘记", "भूलना", "Oublier", "לשכוח", "Olvidar", "மறக்க", "忘れる", "잊다", "Vergessen", "Glömma"],
-    "Choose": ["选择", "चुनना", "Choisir", "לבחור", "Elegir", "தேர்வு செய்ய", "選ぶ", "선택하다", "Wählen", "Välja"],
-    "Change": ["改变", "बदलना", "Changer", "לשנות", "Cambiar", "மாற்ற", "変える", "바꾸다", "Ändern", "Ändra"],
-    "Move": ["移动", "हिलना", "Bouger", "לזוז", "Mover", "நகர", "動く", "움직이다", "Bewegen", "Röra sig"],
-
-    "Turn": ["转", "मुड़ना", "Tourner", "לפנות", "Girar", "திரும்ப", "回る", "돌다", "Drehen", "Vända"],
-    "Stop": ["停止", "रुकना", "Arrêter", "לעצור", "Parar", "நிறுத்த", "止まる", "멈추다", "Stoppen", "Stanna"],
-    "Continue": ["继续", "जारी रखना", "Continuer", "להמשיך", "Continuar", "தொடர", "続ける", "계속하다", "Fortfahren", "Fortsätta"],
-    "Begin": ["开始", "शुरू होना", "Commencer", "להתחיל", "Comenzar", "ஆரம்பிக்க", "始まる", "시작되다", "Beginnen", "Börja"],
-    "End": ["结束", "समाप्त होना", "Terminer", "להסתיים", "Terminar", "முடிவடைய", "終わる", "끝나다", "Beenden", "Sluta"],
-    "Win": ["赢", "जीतना", "Gagner", "לנצח", "Ganar", "வெற்றி பெற", "勝つ", "이기다", "Gewinnen", "Vinna"],
-    "Lose": ["输", "हारना", "Perdre", "להפסיד", "Perder", "இழக்க", "負ける", "지다", "Verlieren", "Förlora"],
-    "Meet": ["见面", "मिलना", "Rencontrer", "לפגוש", "Conocer", "சந்திக்க", "会う", "만나다", "Treffen", "Träffa"],
-    "Follow": ["跟随", "पीछा करना", "Suivre", "לעקוב", "Seguir", "பின்தொடர", "従う", "따라가다", "Folgen", "Följa"],
-    "Lead": ["领导", "नेतृत्व करना", "Diriger", "להוביל", "Liderar", "வழிநடத்த", "導く", "이끌다", "Führen", "Leda"],
-
-    "Sit": ["坐", "बैठना", "S'asseoir", "לשבת", "Sentarse", "உட்கார", "座る", "앉다", "Sitzen", "Sitta"],
-    "Stand": ["站", "खड़ा होना", "Se lever", "לעמוד", "Estar de pie", "நிற்க", "立つ", "서다", "Stehen", "Stå"],
-    "Walk": ["走路", "चलना", "Marcher", "ללכת ברגל", "Caminar", "நடக்க", "歩く", "걷다", "Gehen", "Gå"],
-    "Run": ["跑", "दौड़ना", "Courir", "לרוץ", "Correr", "ஓட", "走る", "달리다", "Rennen", "Springa"],
-    "Sleep": ["睡觉", "सोना", "Dormir", "לישון", "Dormir", "தூங்க", "寝る", "자다", "Schlafen", "Sova"],
-    "Wake up": ["醒来", "जागना", "Se réveiller", "להתעורר", "Despertar", "எழுந்திரு", "起きる", "일어나다", "Aufwachen", "Vakna"],
-    "Eat": ["吃", "खाना", "Manger", "לאכול", "Comer", "சாப்பிட", "食べる", "먹다", "Essen", "Äta"],
-    "Drink": ["喝", "पीना", "Boire", "לשתות", "Beber", "குடிக்க", "飲む", "마시다", "Trinken", "Dricka"],
-    "Cook": ["做饭", "पकाना", "Cuisiner", "לבשל", "Cocinar", "சமைக்க", "料理する", "요리하다", "Kochen", "Laga mat"],
-    "Clean": ["打扫", "साफ करना", "Nettoyer", "לנקות", "Limpiar", "சுத்தம் செய்ய", "掃除する", "청소하다", "Reinigen", "Städa"], 
-
-
-    "Build": ["建造", "निर्माण करना", "Construire", "לבנות", "Construir", "கட்ட", "建てる", "짓다", "Bauen", "Bygga"],
-    "Fix": ["修理", "ठीक करना", "Réparer", "לתקן", "Arreglar", "சரி செய்ய", "直す", "고치다", "Reparieren", "Fixa"],
-    "Send": ["发送", "भेजना", "Envoyer", "לשלוח", "Enviar", "அனுப்பு", "送る", "보내다", "Senden", "Skicka"],
-    "Receive": ["收到", "प्राप्त करना", "Recevoir", "לקבל", "Recibir", "பெறு", "受け取る", "받다", "Empfangen", "Ta emot"],
-    "Learn": ["学习", "सीखना", "Apprendre", "ללמוד", "Aprender", "கற்க", "学ぶ", "배우다", "Lernen", "Lära"],
-    "Teach": ["教", "सिखाना", "Enseigner", "ללמד", "Enseñar", "கற்பிக்க", "教える", "가르치다", "Lehren", "Undervisa"],
-    "Travel": ["旅行", "यात्रा करना", "Voyager", "לטייל", "Viajar", "பயணம் செய்ய", "旅行する", "여행하다", "Reisen", "Resa"],
-    "Work (verb)": ["工作", "काम करना", "Travailler", "לעבוד", "Trabajar", "வேலை செய்ய", "働く", "일하다", "Arbeiten", "Arbeta"],
-    "Study": ["学习", "पढ़ाई करना", "Étudier", "ללמוד", "Estudiar", "படிக்க", "勉強する", "공부하다", "Studieren", "Studera"],
-    "Practice": ["练习", "अभ्यास करना", "Pratiquer", "להתאמן", "Practicar", "பயிற்சி செய்ய", "練習する", "연습하다", "Üben", "Öva"], 
-
-    "Strong": ["强壮", "मजबूत", "Fort", "חזק", "Fuerte", "வலிமையான", "強い", "강한", "Stark", "Stark"],
-    "Weak": ["虚弱", "कमज़ोर", "Faible", "חלש", "Débil", "பலவீனமான", "弱い", "약한", "Schwach", "Svag"],
-    "Heavy": ["重", "भारी", "Lourd", "כבד", "Pesado", "கனமான", "重い", "무거운", "Schwer", "Tung"],
-    "Light (weight)": ["轻", "हल्का", "Léger", "קל", "Ligero", "இலகுவான", "軽い", "가벼운", "Leicht", "Lätt"],
-    "Dark": ["黑暗", "अंधेरा", "Sombre", "חשוך", "Oscuro", "இருள்", "暗い", "어두운", "Dunkel", "Mörk"],
-    "Bright": ["明亮", "चमकीला", "Brillant", "בהיר", "Brillante", "பிரகாசமான", "明るい", "밝은", "Hell", "Ljus"],
-    "Clean (adj)": ["干净", "साफ", "Propre", "נקי", "Limpio", "சுத்தமான", "きれい", "깨끗한", "Sauber", "Ren"],
-    "Dirty": ["脏", "गंदा", "Sale", "מלוכלך", "Sucio", "அழுக்கு", "汚い", "더러운", "Schmutzig", "Smutsig"],
-    "Full": ["满", "भरा हुआ", "Plein", "מלא", "Lleno", "நிறைந்த", "いっぱい", "가득한", "Voll", "Full"],
-    "Empty": ["空", "खाली", "Vide", "ריק", "Vacío", "காலி", "空", "빈", "Leer", "Tom"], 
-
-    "Young": ["年轻", "युवा", "Jeune", "צעיר", "Joven", "இளம்", "若い", "젊은", "Jung", "Ung"],
-    "Old": ["年老", "बूढ़ा", "Vieux", "זקן", "Viejo", "முதிய", "古い", "늙은", "Alt", "Gammal"],
-    "New": ["新的", "नया", "Nouveau", "חדש", "Nuevo", "புதிய", "新しい", "새로운", "Neu", "Ny"],
-    "Beautiful": ["美丽", "सुंदर", "Beau", "יפה", "Hermoso", "அழகான", "美しい", "아름다운", "Schön", "Vacker"],
-    "Ugly": ["丑", "बदसूरत", "Laid", "מכוער", "Feo", "அசிங்கமான", "醜い", "못생긴", "Hässlich", "Ful"],
-    "Cheap": ["便宜", "सस्ता", "Bon marché", "זול", "Barato", "மலிவு", "安い", "싼", "Billig", "Billig"],
-    "Expensive": ["贵", "महंगा", "Cher", "יקר", "Caro", "விலையுயர்ந்த", "高い", "비싼", "Teuer", "Dyr"],
-    "Interesting": ["有趣", "दिलचस्प", "Intéressant", "מעניין", "Interesante", "சுவாரஸ்யமான", "面白い", "흥미로운", "Interessant", "Intressant"],
-    "Important (adj)": ["重要的", "महत्वपूर्ण", "Important", "חשוב", "Importante", "முக்கியமான", "重要な", "중요한", "Wichtig", "Viktig"],
-    "Necessary": ["必要", "ज़रूरी", "Nécessaire", "נחוץ", "Necesario", "தேவையான", "必要な", "필수적인", "Notwendig", "Nödvändig"], 
-
-    "Health": ["健康", "स्वास्थ्य", "Santé", "בריאות", "Salud", "ஆரோக்கியம்", "健康", "건강", "Gesundheit", "Hälsa"],
-    "Body": ["身体", "शरीर", "Corps", "גוף", "Cuerpo", "உடல்", "体", "몸", "Körper", "Kropp"],
-    "Head": ["头", "सिर", "Tête", "ראש", "Cabeza", "தலை", "頭", "머리", "Kopf", "Huvud"],
-    "Hand": ["手", "हाथ", "Main", "יד", "Mano", "கை", "手", "손", "Hand", "Hand"],
-    "Eye": ["眼睛", "आँख", "Œil", "עין", "Ojo", "கண்", "目", "눈", "Auge", "Öga"],
-    "Ear": ["耳朵", "कान", "Oreille", "אוזן", "Oreja", "காது", "耳", "귀", "Ohr", "Öra"],
-    "Mouth": ["嘴", "मुंह", "Bouche", "פה", "Boca", "வாய்", "口", "입", "Mund", "Mun"],
-    "Heart": ["心", "दिल", "Cœur", "לב", "Corazón", "இதயம்", "心臓", "심장", "Herz", "Hjärta"],
-    "Mind": ["思想", "मन", "Esprit", "מוח", "Mente", "மனம்", "心", "마음", "Geist", "Sinne"],
-    "Face": ["脸", "चेहरा", "Visage", "פנים", "Cara", "முகம்", "顔", "얼굴", "Gesicht", "Ansikte"], 
-
-    "Room": ["房间", "कमरा", "Pièce", "חדר", "Habitación", "அறை", "部屋", "방", "Zimmer", "Rum"],
-    "Bed": ["床", "बिस्तर", "Lit", "מיטה", "Cama", "படுக்கை", "ベッド", "침대", "Bett", "Säng"],
-    "Bathroom": ["浴室", "बाथरूम", "Salle de bain", "חדר אמבטיה", "Baño", "குளியலறை", "お風呂", "욕실", "Badezimmer", "Badrum"],
-    "Kitchen": ["厨房", "रसोई", "Cuisine", "מטבח", "Cocina", "சமையலறை", "台所", "부엌", "Küche", "Kök"],
-    "Office": ["办公室", "कार्यालय", "Bureau", "משרד", "Oficina", "அலுவலகம்", "オフィス", "사무실", "Büro", "Kontor"],
-    "Job": ["工作", "नौकरी", "Emploi", "עבודה", "Empleo", "வேலை", "職業", "직업", "Job", "Jobb"],
-    "Boss": ["老板", "बॉस", "Patron", "בוס", "Jefe", "முதலாளர்", "上司", "상사", "Chef", "Chef"],
-    "Customer": ["顾客", "ग्राहक", "Client", "לקוח", "Cliente", "வாடிக்கையாளர்", "客", "고객", "Kunde", "Kund"],
-    "Team": ["团队", "टीम", "Équipe", "צוות", "Equipo", "அணி", "チーム", "팀", "Team", "Team"],
-    "Company": ["公司", "कंपनी", "Entreprise", "חברה", "Empresa", "நிறுவனம்", "会社", "회사", "Firma", "Företag"],
-
-    "Minute": ["分钟", "मिनट", "Minute", "דקה", "Minuto", "நிமிடம்", "分", "분", "Minute", "Minut"],
-    "Hour": ["小时", "घंटा", "Heure", "שעה", "Hora", "மணி", "時間", "시간", "Stunde", "Timme"],
-    "Week": ["星期", "सप्ताह", "Semaine", "שבוע", "Semana", "வாரம்", "週", "주", "Woche", "Vecka"],
-    "Month": ["月", "महीना", "Mois", "חודש", "Mes", "மாதம்", "月", "달", "Monat", "Månad"],
-    "Year": ["年", "साल", "Année", "שנה", "Año", "ஆண்டு", "年", "년", "Jahr", "År"],
-    "Morning": ["早晨", "सुबह", "Matin", "בוקר", "Mañana", "காலை", "朝", "아침", "Morgen", "Morgon"],
-    "Evening": ["晚上", "शाम", "Soir", "ערב", "Tarde", "மாலை", "夕方", "저녁", "Abend", "Kväll"],
-    "Season": ["季节", "मौसम", "Saison", "עונה", "Estación", "பருவம்", "季節", "계절", "Jahreszeit", "Säsong"],
-    "North": ["北", "उत्तर", "Nord", "צפון", "Norte", "வடக்கு", "北", "북", "Norden", "Norr"],
-    "South": ["南", "दक्षिण", "Sud", "דרום", "Sur", "தெற்கு", "南", "남", "Süden", "Söder"],
-
-    "East": ["东", "पूर्व", "Est", "מזרח", "Este", "கிழக்கு", "東", "동", "Osten", "Öster"],
-    "West": ["西", "पश्चिम", "Ouest", "מערב", "Oeste", "மேற்கு", "西", "서", "Westen", "Väster"],
-    "Direction": ["方向", "दिशा", "Direction", "כיוון", "Dirección", "திசை", "方向", "방향", "Richtung", "Riktning"],
-    "Place": ["地方", "जगह", "Endroit", "מקום", "Lugar", "இடம்", "場所", "장소", "Ort", "Plats"],
-    "Area": ["地区", "क्षेत्र", "Zone", "אזור", "Área", "பகுதி", "地域", "지역", "Gebiet", "Område"],
-    "Space": ["空间", "स्थान", "Espace", "מרחב", "Espacio", "விண்வெளி", "空間", "공간", "Raum", "Utrymme"],
-    "Point": ["点", "बिंदु", "Point", "נקודה", "Punto", "புள்ளி", "点", "점", "Punkt", "Punkt"],
-    "Line": ["线", "रेखा", "Ligne", "קו", "Línea", "கோடு", "線", "선", "Linie", "Linje"],
-    "Side": ["边", "पक्ष", "Côté", "צד", "Lado", "பக்கம்", "側", "쪽", "Seite", "Sida"],
-    "Middle": ["中间", "बीच", "Milieu", "אמצע", "Medio", "நடுத்தரம்", "真ん中", "가운데", "Mitte", "Mitten"],
-
-    "Beginning": ["开始", "शुरुआत", "Début", "התחלה", "Inicio", "தொடக்கம்", "始まり", "시작", "Anfang", "Början"],
-    "Ending": ["结尾", "अंत", "Fin", "סוף", "Final", "முடிவு", "終わり", "끝", "Ende", "Slut"], 
-
-    "Chance": ["机会", "मौका", "Chance", "סיכוי", "Oportunidad", "வாய்ப்பு", "チャンス", "기회", "Chance", "Chans"],
-    "Choice": ["选择", "चयन", "Choix", "בחירה", "Elección", "தேர்வு", "選択", "선택", "Wahl", "Val"],
-    "Decision": ["决定", "निर्णय", "Décision", "החלטה", "Decisión", "முடிவு", "決定", "결정", "Entscheidung", "Beslut"],
-    "Result": ["结果", "परिणाम", "Résultat", "תוצאה", "Resultado", "விளைவு", "結果", "결과", "Ergebnis", "Resultat"],
-    "Effect": ["影响", "प्रभाव", "Effet", "השפעה", "Efecto", "விளைவு", "効果", "효과", "Effekt", "Effekt"],
-    "Cause": ["原因", "कारण", "Cause", "גורם", "Causa", "காரணம்", "原因", "원인", "Ursache", "Orsak"],
-    "Situation": ["情况", "स्थिति", "Situation", "מצב", "Situación", "நிலைமை", "状況", "상황", "Situation", "Situation"],
-    "Condition": ["条件", "शर्त", "Condition", "תנאי", "Condición", "நிலை", "条件", "조건", "Bedingung", "Villkor"], 
-
-    "Experience": ["经验", "अनुभव", "Expérience", "ניסיון", "Experiencia", "அனுபவம்", "経験", "경험", "Erfahrung", "Erfarenhet"],
-    "Memory": ["记忆", "याद", "Mémoire", "זיכרון", "Memoria", "நினைவு", "記憶", "기억", "Gedächtnis", "Minne"],
-    "Dream": ["梦", "सपना", "Rêve", "חלום", "Sueño", "கனவு", "夢", "꿈", "Traum", "Dröm"],
-    "Hope": ["希望", "आशा", "Espoir", "תקווה", "Esperanza", "நம்பிக்கை", "希望", "희망", "Hoffnung", "Hopp"],
-    "Fear": ["恐惧", "डर", "Peur", "פחד", "Miedo", "பயம்", "恐れ", "두려움", "Angst", "Rädsla"],
-    "Happiness": ["幸福", "खुशी", "Bonheur", "אושר", "Felicidad", "மகிழ்ச்சி", "幸福", "행복", "Glück", "Lycka"],
-    "Anger": ["愤怒", "गुस्सा", "Colère", "כעס", "Enojo", "கோபம்", "怒り", "분노", "Wut", "Ilska"],
-    "Love (noun)": ["爱情", "प्रेम", "Amour", "אהבה", "Amor", "காதல்", "愛", "사랑", "Liebe", "Kärlek"],
-    "Peace": ["和平", "शांति", "Paix", "שלום", "Paz", "அமைதி", "平和", "평화", "Frieden", "Fred"],
-    "War": ["战争", "युद्ध", "Guerre", "מלחמה", "Guerra", "போர்", "戦争", "전쟁", "Krieg", "Krig"],
-
+chinese_word_bank = {
+    "Hello": ["你好","nǐ hǎo"],
+    "Good morning": ["早上好", "zǎo shang hǎo"],
+    "Good afternoon": ["下午好", "xià wǔ hǎo"],
+    "Good evening": ["晚上好", "wǎn shang hǎo"],
+    "Thank you": ["谢谢", "xiè xie"],
 }
-
+hindi_word_bank = {
+    "Hello": "नमस्ते",
+    "Goodbye": "अलविदा",
+    "Please": "कृपया",
+    "Thank you": "धन्यवाद",
+    "Yes": "हाँ",
+    "No": "नहीं",
+    "Excuse me": "माफ़ कीजिए",
+    "Sorry": "माफ़ करना",
+}
+french_word_bank = {
+    "Hello": "Bonjour"
+}
+hebrew_word_bank = {
+    "Hello": "שלום"
+}
+spanish_word_bank = {
+    "Hello": "Hola"
+}
+tamil_word_bank = {
+    "Hello": "வணக்கம்"
+}
+japanese_word_bank = {
+    "Hello": "こんにちは"
+}
+korean_word_bank = {
+    "Hello": "안녕하세요"
+}
+german_word_bank = {
+    "Hello": "Hallo"
+}
+swedish_word_bank = {
+    "Hello": "Hej"
+}
 
 language_to_index = {
     "Chinese": 0,
@@ -413,6 +75,7 @@ language_to_index = {
 
 
 languages = []
+show_pinyin = False
 
 answer_counter = 0
 
@@ -438,7 +101,10 @@ try:
 except pygame.error as e:
     print(f"Warning: Missing language fonts - {e}")
     font_chinese = font_hindi = font_hebrew = font_tamil = font_japanese = font_korean = pygame.font.SysFont("arial", 25)
-font_latin = pygame.font.SysFont("arial", 25)
+font_latin = pygame.font.Font("NotoSans-VariableFont_wdth.ttf", 25)
+font_pinyin = pygame.font.Font("NotoSans-VariableFont_wdth.ttf", 18)
+
+
 
 # UI Layout (MENU BUTTONS - text-based)
 rules_box = pygame.Rect(60, 140, 680, 220)
@@ -554,22 +220,79 @@ language_list = ["Chinese", "Hindi", "French", "Hebrew", "Spanish", "Tamil", "Ja
 # Game Functions
 def get_random_word():
     if len(languages) > 0:
-        english_word = random.choice(list(word_bank.keys()))
         lang_num = random.randint(0, len(languages)-1)
         correct_lang = languages[lang_num]
         lang_index = language_to_index[correct_lang]
-
-        # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean, German, Swedish]
-        correct_translation = word_bank[english_word][lang_index]
-        print(lang_index)
         language = language_list[lang_index]
-        return english_word, language, correct_translation, lang_index
+        correct_pinyin = None
+        # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean, German, Swedish]
+        if language == "Chinese":
+            english_word = random.choice(list(chinese_word_bank.keys()))
+            correct_translation = chinese_word_bank[english_word][0]
+            correct_pinyin = chinese_word_bank[english_word][1]
+        elif language == "Hindi":
+            english_word = random.choice(list(hindi_word_bank.keys()))
+            correct_translation = hindi_word_bank[english_word]
+        elif language == "French":
+            english_word = random.choice(list(french_word_bank.keys()))
+            correct_translation = french_word_bank[english_word]
+        elif language == "Hebrew":
+            english_word = random.choice(list(hebrew_word_bank.keys()))
+            correct_translation = hebrew_word_bank[english_word]
+        elif language == "Spanish":
+            english_word = random.choice(list(spanish_word_bank.keys()))
+            correct_translation = spanish_word_bank[english_word]
+        elif language == "Tamil":
+            english_word = random.choice(list(tamil_word_bank.keys()))
+            correct_translation = tamil_word_bank[english_word]
+        elif language == "Japanese":
+            english_word = random.choice(list(japanese_word_bank.keys()))
+            correct_translation = japanese_word_bank[english_word]
+        elif language == "Korean":
+            english_word = random.choice(list(korean_word_bank.keys()))
+            correct_translation = korean_word_bank[english_word]
+        elif language == "German":
+            english_word = random.choice(list(german_word_bank.keys()))
+            correct_translation = german_word_bank[english_word]
+        elif language == "Swedish":
+            english_word = random.choice(list(swedish_word_bank.keys()))
+            correct_translation = swedish_word_bank[english_word]
+        
+        return english_word, language, correct_translation, correct_pinyin
 
-def generate_answers(correct_translation, lang_index):
+def generate_answers(correct_translation, language):
     answers = [correct_translation]
     while len(answers) < 4:
-        random_word = random.choice(list(word_bank.keys()))
-        wrong_translation = word_bank[random_word][lang_index]
+        if language == "Chinese":
+            random_word = random.choice(list(chinese_word_bank.keys()))
+            wrong_translation = chinese_word_bank[random_word][0]
+        elif language == "Hindi":
+            random_word = random.choice(list(hindi_word_bank.keys()))
+            wrong_translation = hindi_word_bank[random_word]
+        elif language == "French":
+            random_word = random.choice(list(french_word_bank.keys()))
+            wrong_translation = french_word_bank[random_word]
+        elif language == "Hebrew":
+            random_word = random.choice(list(hebrew_word_bank.keys()))
+            wrong_translation = hebrew_word_bank[random_word]
+        elif language == "Spanish":
+            random_word = random.choice(list(spanish_word_bank.keys()))
+            wrong_translation = spanish_word_bank[random_word]
+        elif language == "Tamil":
+            random_word = random.choice(list(tamil_word_bank.keys()))
+            wrong_translation = tamil_word_bank[random_word]
+        elif language == "Japanese":
+            random_word = random.choice(list(japanese_word_bank.keys()))
+            wrong_translation = japanese_word_bank[random_word]
+        elif language == "Korean":
+            random_word = random.choice(list(korean_word_bank.keys()))
+            wrong_translation = korean_word_bank[random_word]
+        elif language == "German":
+            random_word = random.choice(list(german_word_bank.keys()))
+            wrong_translation = german_word_bank[random_word]
+        elif language == "Swedish":
+            random_word = random.choice(list(swedish_word_bank.keys()))
+            wrong_translation = swedish_word_bank[random_word]
         if wrong_translation not in answers:
             answers.append(wrong_translation)
     random.shuffle(answers)
@@ -643,6 +366,8 @@ korean_rect = pygame.Rect(650, 520, 120, 50)
 german_rect = pygame.Rect(550, 470, 120, 50)
 swedish_rect = pygame.Rect(550, 520, 120, 50)
 
+pinyin_rect = pygame.Rect(50, 400, 100, 30)
+
 # boulder speeds button format
 min_speed = pygame.Rect(550, 320, 120, 50)
 med_speed = pygame.Rect(550, 370, 120, 50)
@@ -669,10 +394,10 @@ while running:
                 if len(languages) > 0:
                     if start_button_rect.collidepoint(event.pos):
                         game_on = True
-                        english_word, language, correct_translation, lang_index = get_random_word()
+                        english_word, language, correct_translation, correct_pinyin = get_random_word()
                         # lang_index = languages.index(language)
                         
-                        answers = generate_answers(correct_translation, lang_index)
+                        answers = generate_answers(correct_translation, language)
                 elif quit_button_rect.collidepoint(event.pos):
                     running = False
                 if chinese_rect.collidepoint(event.pos):
@@ -754,6 +479,8 @@ while running:
                 elif max_speed.collidepoint(event.pos):
                     if not max_boulder_speed == 2.0:
                         max_boulder_speed = 2.0
+                elif pinyin_rect.collidepoint(event.pos):
+                    show_pinyin = not show_pinyin
 
 
 # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean] 
@@ -829,6 +556,15 @@ while running:
         else: 
             chinese_colour = PURPLE
         draw_button(screen, chinese_rect, "Chinese", button_font, chinese_colour, WHITE)
+
+        if show_pinyin:
+            pinyin_colour = (25, 25, 25)
+        elif pinyin_rect.collidepoint(mouse_pos):
+            pinyin_colour = (180, 0, 180)
+        else:
+            pinyin_colour = PURPLE
+
+        draw_button(screen, pinyin_rect, "Pinyin?", button_font, pinyin_colour, WHITE)
 
         if "Hindi" in languages:
             hindi_colour = (25, 25, 25)
@@ -969,9 +705,23 @@ while running:
 
             screen.blit(rotated_image, rotated_rect.topleft)
             font = get_font_for_language(language)
-            text_surface = font.render(answers[i], True, WHITE)
-            text_rect = text_surface.get_rect(center=box.center)
-            screen.blit(text_surface, text_rect)
+            if language == "Chinese" and show_pinyin == True:
+                # chinese 
+
+                text_surface = font.render(answers[i], True, WHITE)
+                text_rect = text_surface.get_rect(center=box.center)
+                screen.blit(text_surface, text_rect)
+                for key, value in chinese_word_bank.items():
+                    if value[0] == answers[i]:
+                        pinyin_text = value[1]
+                        break
+                pinyin_surface = font_pinyin.render(pinyin_text, True, WHITE)
+                pinyin_rect = pinyin_surface.get_rect(center=(box.centerx, box.centery + 25))
+                screen.blit(pinyin_surface, pinyin_rect)
+            else:
+                text_surface = font.render(answers[i], True, WHITE)
+                text_rect = text_surface.get_rect(center=box.center)
+                screen.blit(text_surface, text_rect)
 
             if box.y > screen.get_height():
                 game_on = False
@@ -1000,9 +750,9 @@ while running:
                         if answers[i] == correct_translation:
                             # Correct answer: generate new question
                             answer_counter += 1
-                            english_word, language, correct_translation, lang_index = get_random_word()
+                            english_word, language, correct_translation, correct_pinyin = get_random_word()
                             # lang_index = languages.index(language)
-                            answers = generate_answers(correct_translation, lang_index)
+                            answers = generate_answers(correct_translation, language)
                             
                             # Clears all bullets
                             shots.clear()
@@ -1073,9 +823,9 @@ while running:
             answer_counter = 0
             shots.clear()
 
-            english_word, language, correct_translation, lang_index = get_random_word()
+            english_word, language, correct_translation, correct_pinyin = get_random_word()
             # lang_index = languages.index(language)
-            answers = generate_answers(correct_translation, lang_index)
+            answers = generate_answers(correct_translation, language)
 
             player_ufo.rect.x = 300
             player_ufo.rect.y = 470
