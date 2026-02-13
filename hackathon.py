@@ -76,6 +76,9 @@ language_to_index = {
 
 languages = []
 show_pinyin = False
+lang_index = 0
+language_list = ["Chinese", "Hindi", "French", "Hebrew", "Spanish", "Tamil", "Japanese", "Korean", "German", "Swedish"]
+
 
 answer_counter = 0
 
@@ -88,6 +91,8 @@ title_font = pygame.font.SysFont("Times New Roman", 58)
 body_font = pygame.font.SysFont("Times New Roman", 25)
 button_font = pygame.font.SysFont("Times New Roman", 29)
 counter_font = pygame.font.SysFont("Times New Roman", 30)
+font_latin = pygame.font.Font("NotoSans-VariableFont_wdth.ttf", 25)
+font_pinyin = pygame.font.Font("NotoSans-VariableFont_wdth.ttf", 18)
 
 # Language-specific fonts (ensure font files exist!)
 # Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean
@@ -101,9 +106,6 @@ try:
 except pygame.error as e:
     print(f"Warning: Missing language fonts - {e}")
     font_chinese = font_hindi = font_hebrew = font_tamil = font_japanese = font_korean = pygame.font.SysFont("arial", 25)
-font_latin = pygame.font.Font("NotoSans-VariableFont_wdth.ttf", 25)
-font_pinyin = pygame.font.Font("NotoSans-VariableFont_wdth.ttf", 18)
-
 
 
 # UI Layout (MENU BUTTONS - text-based)
@@ -121,20 +123,20 @@ except pygame.error as e:
     background.fill(PURPLE)
 
 # Answer boxes
-box_size = 120
-box_y = -box_size
+boulder_size = 120
+boulder_y = -boulder_size
 answer_boxes = [
-    pygame.Rect(100 + i * 160, box_y, box_size, box_size)
+    pygame.Rect(100 + i * 160, boulder_y, boulder_size, boulder_size)
     for i in range(4)
 ]
 
 # Boulder image
 try:
     boulder_image = pygame.image.load("space_boulder_proper.png").convert_alpha()
-    boulder_image = pygame.transform.scale(boulder_image, (box_size, box_size))
+    boulder_image = pygame.transform.scale(boulder_image, (boulder_size, boulder_size))
 except pygame.error as e:
     print(f"Error loading boulder: {e}")
-    boulder_image = pygame.Surface((box_size, box_size))
+    boulder_image = pygame.Surface((boulder_size, boulder_size))
     boulder_image.fill((100, 100, 100))
 
 
@@ -167,7 +169,6 @@ class ImageQuitButton:  # Rename to avoid confusion with text quit button
             if self.rect.collidepoint(event.pos):
                 return True
         return False
-
 
 # Game Over Screen Functions
 def load_ending_image(image_path, screen_size):
@@ -215,8 +216,7 @@ play_again_button = ImageQuitButton(
     y=game_over_quit_button.rect.y - 5,
     image=again_img
 )
-lang_index = 0
-language_list = ["Chinese", "Hindi", "French", "Hebrew", "Spanish", "Tamil", "Japanese", "Korean", "German", "Swedish"]
+
 # Game Functions
 def get_random_word():
     if len(languages) > 0:
@@ -759,8 +759,8 @@ while running:
                             for i, box in enumerate(answer_boxes[:]):
                                 boulder_speeds = [random.uniform(0.75, max_boulder_speed) for _ in answer_boxes]
                                 # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
-                                box_y = random.randint(0, box_size)
-                                box.y = -box_y
+                                boulder_y = random.randint(0, boulder_size)
+                                box.y = -boulder_y
                             boulder_angles = [0 for _ in answer_boxes]  # initial rotation for each boulder
                             boulder_rotation_speeds = [random.uniform(-5, 5) for _ in answer_boxes]  # degrees per frame
 
@@ -789,14 +789,59 @@ while running:
             True,
             BLACK
         )
-
         final_score_rect = final_score_surf.get_rect(
             bottomright=(WIDTH - 105, HEIGHT - 45)  # padding from edges
         )
 
+        # print the answer 
+        # Get correct font for translation
+        ans_font = get_font_for_language(language)
+        # Render first part (English text)
+        text_part1 = f"{english_word} in {language} was   "
+        part1_surf = body_font.render(text_part1, True, BLACK)
+
+        # Render translation in language font
+        part2_surf = ans_font.render(correct_translation, True, BLACK)
+
+        # Position them side-by-side
+        total_width = part1_surf.get_width() + part2_surf.get_width()
+        x = 300
+        y = 400
+
+        part1_rect = part1_surf.get_rect(topleft=(x, y))
+        part2_rect = part2_surf.get_rect(topleft=(part1_rect.right, y))
+
+        # Background box
+        bg_padding = 12
+        bg_rect = pygame.Rect(
+            x - bg_padding,
+            y - bg_padding,
+            total_width + bg_padding * 2,
+            part1_surf.get_height() + bg_padding * 2
+        )
+
+        score_bg = pygame.Surface(bg_rect.size, pygame.SRCALPHA)
+        pygame.draw.rect(
+            score_bg,
+            (255, 255, 255, 150),
+            score_bg.get_rect(),
+            border_radius=10
+        )
+
+        screen.blit(score_bg, bg_rect.topleft)
+
+        # Draw text
+        screen.blit(part1_surf, part1_rect)
+        screen.blit(part2_surf, part2_rect)
+
+    
+
         # Create transparent background for final score
         bg_padding = 12
         bg_rect = final_score_rect.inflate(bg_padding * 2, bg_padding * 2)
+
+        bg_padding = 12
+        # bg_rect = answer_rect.inflate(bg_padding * 2, bg_padding * 2)
 
         score_bg = pygame.Surface(bg_rect.size, pygame.SRCALPHA)
         pygame.draw.rect(
@@ -810,6 +855,8 @@ while running:
         screen.blit(score_bg, bg_rect.topleft)
 
         screen.blit(final_score_surf, final_score_rect)
+
+        # screen.blit(answer_surf, answer_rect)
         
         # Draw image-based quit button
         game_over_quit_button.draw()
@@ -831,7 +878,7 @@ while running:
             player_ufo.rect.y = 470
 
             for i, box in enumerate(answer_boxes[:]):
-                box.y = -box_size
+                box.y = -boulder_size
                 boulder_speeds = [random.uniform(0.75, max_boulder_speed) for _ in answer_boxes]
                 # boulder_drift = [random.uniform(-0.6, 0.6) for _ in answer_boxes]
             boulder_angles = [0 for _ in answer_boxes]  # initial rotation for each boulder
