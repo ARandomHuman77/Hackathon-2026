@@ -110,8 +110,8 @@ except pygame.error as e:
 
 # UI Layout (MENU BUTTONS - text-based)
 rules_box = pygame.Rect(60, 140, 680, 220)
-start_button_rect = pygame.Rect(WIDTH // 2 - 140, 400, 120, 50)  # Rename to avoid collision
-quit_button_rect = pygame.Rect(WIDTH // 2 + 20, 400, 120, 50)    # Text-based quit button (Rect)
+start_button_rect = pygame.Rect(WIDTH // 2 - 140, 350, 120, 50)  # Rename to avoid collision
+quit_button_rect = pygame.Rect(WIDTH // 2 + 20, 350, 120, 50)    # Text-based quit button (Rect)
 
 # Background
 try:
@@ -343,35 +343,34 @@ running = True
 game_on = False
 game_over = False  # New state for game over screen
 
-# Load the music file (WAV)
-rickroll_sound = pygame.mixer.Sound("rickroll_proper.wav")
-rickroll_sound.set_volume(0.5)
+
+sad_song_files = ["meow.wav", "rickroll_proper.wav", "communism.wav", "orphans.wav"]
 
 # Variable that keeps track if the music is playing
-rickroll_playing = False
+end_music_playing = False
 
 
 # Game State Initialization
 
 
 # language button format
-chinese_rect = pygame.Rect(50, 470, 120, 50)
-hindi_rect = pygame.Rect(250, 470, 120, 50)
-french_rect = pygame.Rect(450, 470, 120, 50)
-hebrew_rect = pygame.Rect(650, 470, 120, 50)
-spanish_rect = pygame.Rect(50, 520, 120, 50)
-tamil_rect = pygame.Rect(250, 520, 120, 50)
-japanese_rect = pygame.Rect(450, 520, 120, 50)
-korean_rect = pygame.Rect(650, 520, 120, 50)
-german_rect = pygame.Rect(550, 470, 120, 50)
-swedish_rect = pygame.Rect(550, 520, 120, 50)
+chinese_rect = pygame.Rect(50, 410, 120, 50)
+hindi_rect = pygame.Rect(180, 410, 120, 50)
+french_rect = pygame.Rect(180, 470, 120, 50)
+hebrew_rect = pygame.Rect(180, 530, 120, 50)
+spanish_rect = pygame.Rect(50, 530, 120, 50)
+tamil_rect = pygame.Rect(310, 410, 120, 50)
+japanese_rect = pygame.Rect(310, 470, 120, 50)
+korean_rect = pygame.Rect(310, 530, 120, 50)
+german_rect = pygame.Rect(440, 410, 120, 50)
+swedish_rect = pygame.Rect(440, 470, 120, 50)
 
-pinyin_rect = pygame.Rect(50, 400, 100, 30)
+pinyin_rect = pygame.Rect(60, 460, 100, 30)
 
 # boulder speeds button format
-min_speed = pygame.Rect(550, 320, 120, 50)
-med_speed = pygame.Rect(550, 370, 120, 50)
-max_speed = pygame.Rect(550, 420, 120, 50)
+min_speed = pygame.Rect(680, 450, 120, 50)
+med_speed = pygame.Rect(680, 500, 120, 50)
+max_speed = pygame.Rect(680, 550, 120, 50)
 
 # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean] 
 
@@ -524,8 +523,8 @@ while running:
         # Rules Text
         rules_lines = [
             "Rules:",
-            "1.) Guess the translation of English words",
-            "     in French, Hindi, or Mandarin",
+            "1.) Select the language(s) you would like to translate",
+            "     English words into",
             "2.) Guess wrong and the game ends! (RIP UFO)",
             "3.) You might want friends who speak different languages",
             "4.) Use a/d to move and space to shoot. Have fun!( ͡° ͜ʖ ͡°)"
@@ -723,7 +722,7 @@ while running:
                 text_rect = text_surface.get_rect(center=box.center)
                 screen.blit(text_surface, text_rect)
 
-            if box.y > screen.get_height():
+            if box.y > screen.get_height() or box.y + 50 == player_ufo.rect.y:
                 game_on = False
                 game_over = True
 
@@ -774,11 +773,15 @@ while running:
 
     # GAME OVER STATE
     elif game_over:
+        
+        # Load the music file (WAV)
+        end_music = pygame.mixer.Sound(random.choice(sad_song_files))
+        end_music.set_volume(0.5)
 
-        if not rickroll_playing:
+        if not end_music_playing:
             # Play music (loops infinitely)
-            rickroll_channel = rickroll_sound.play(-1)
-            rickroll_playing = True
+            end_music_channel = end_music.play(-1)
+            end_music_playing = True
 
         # Draw game over background image
         screen.blit(ending_image, (0, 0))
@@ -797,7 +800,7 @@ while running:
         # Get correct font for translation
         ans_font = get_font_for_language(language)
         # Render first part (English text)
-        text_part1 = f"{english_word} in {language} was   "
+        text_part1 = f"{english_word} in {language} is   "
         part1_surf = body_font.render(text_part1, True, BLACK)
 
         # Render translation in language font
@@ -805,7 +808,7 @@ while running:
 
         # Position them side-by-side
         total_width = part1_surf.get_width() + part2_surf.get_width()
-        x = 300
+        x = 330
         y = 400
 
         part1_rect = part1_surf.get_rect(topleft=(x, y))
@@ -861,10 +864,11 @@ while running:
         # Draw image-based quit button
         game_over_quit_button.draw()
         play_again_button.draw()
+
         if play_again_button.check_click(event):
 
-            rickroll_channel.stop()
-            rickroll_playing = False # Stops music
+            end_music_channel.stop()
+            end_music_playing = False # Stops music
 
             # RESET GAME
             answer_counter = 0
