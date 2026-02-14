@@ -4,6 +4,7 @@ import random
 
 os.chdir(os.path.dirname(__file__))
 
+pygame.mixer.pre_init(44100, -16, 2, 256)
 pygame.init()
 
 # Constants
@@ -350,6 +351,11 @@ sad_song_files = ["meow.wav", "rickroll_proper.wav", "communism.wav", "orphans.w
 end_music_playing = False
 
 
+pew_sound = pygame.mixer.Sound("pew.wav")
+pew_sound.set_volume(0.5)
+
+
+
 # Game State Initialization
 
 
@@ -496,6 +502,7 @@ while running:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 bullet_rect = pygame.Rect(player_ufo.rect.centerx - 5, player_ufo.rect.y + 60, 10, 10)
                 shots.append(bullet_rect)
+                pew_sound.play()
 
     # UFO Movement (only in game state)
     if game_on and not game_over:
