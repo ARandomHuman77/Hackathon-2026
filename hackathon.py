@@ -1202,7 +1202,7 @@ language_to_index = {
 languages = []
 show_pinyin = False
 lang_index = 0
-language_list = ["Chinese", "Hindi", "French", "Hebrew", "Spanish", "Tamil", "Japanese", "Korean", "German", "Swedish"]
+language_list = ["Chinese", "Hindi", "French", "Hebrew", "Spanish", "Tamil", "Japanese", "Korean", "German", "Swedish", "Russian", "Sinhala", "Latin", "Greek", "Arabic"]
 
 
 answer_counter = 0
@@ -1228,9 +1228,11 @@ try:
     font_tamil = pygame.font.Font("NotoSansTamil-VariableFont_wdth.ttf", 25)
     font_japanese = pygame.font.Font("NotoSansJP-VariableFont_wght.ttf", 25)
     font_korean = pygame.font.Font("NotoSansKR-VariableFont_wght.ttf", 25)
+    font_sinhala = pygame.font.Font("NotoSansSinhala-VariableFont_wdth.ttf", 25)
+    font_arabic = pygame.font.Font("NotoSansArabic-VariableFont_wdth.ttf", 25)
 except pygame.error as e:
     print(f"Warning: Missing language fonts - {e}")
-    font_chinese = font_hindi = font_hebrew = font_tamil = font_japanese = font_korean = pygame.font.SysFont("arial", 25)
+    font_chinese = font_hindi = font_hebrew = font_tamil = font_japanese = font_korean = font_sinhala = font_arabic = pygame.font.SysFont("arial", 25)
 
 
 # UI Layout (MENU BUTTONS - text-based)
@@ -1382,6 +1384,21 @@ def get_random_word():
         elif language == "Swedish":
             english_word = random.choice(list(swedish_word_bank.keys()))
             correct_translation = swedish_word_bank[english_word]
+        elif language == "Russian":
+            english_word = random.choice(list(russian_word_bank.keys()))
+            correct_translation = russian_word_bank[english_word]
+        elif language == "Sinhala":
+            english_word = random.choice(list(sinhala_word_bank.keys()))
+            correct_translation = sinhala_word_bank[english_word]
+        elif language == "Latin":
+            english_word = random.choice(list(latin_word_bank.keys()))
+            correct_translation = latin_word_bank[english_word]
+        elif language == "Greek":
+            english_word = random.choice(list(greek_word_bank.keys()))
+            correct_translation = greek_word_bank[english_word]
+        elif language == "Arabic":
+            english_word = random.choice(list(arabic_word_bank.keys()))
+            correct_translation = arabic_word_bank[english_word]
         
         return english_word, language, correct_translation, correct_pinyin
 
@@ -1418,6 +1435,21 @@ def generate_answers(correct_translation, language):
         elif language == "Swedish":
             random_word = random.choice(list(swedish_word_bank.keys()))
             wrong_translation = swedish_word_bank[random_word]
+        elif language == "Russian":
+            random_word = random.choice(list(russian_word_bank.keys()))
+            wrong_translation = russian_word_bank[random_word]
+        elif language == "Sinhala":
+            random_word = random.choice(list(sinhala_word_bank.keys()))
+            wrong_translation = sinhala_word_bank[random_word]
+        elif language == "Latin":
+            random_word = random.choice(list(latin_word_bank.keys()))
+            wrong_translation = latin_word_bank[random_word]
+        elif language == "Greek":
+            random_word = random.choice(list(greek_word_bank.keys()))
+            wrong_translation = greek_word_bank[random_word]
+        elif language == "Arabic":
+            random_word = random.choice(list(arabic_word_bank.keys()))
+            wrong_translation = arabic_word_bank[random_word]
         if wrong_translation not in answers:
             answers.append(wrong_translation)
     random.shuffle(answers)
@@ -1436,10 +1468,13 @@ def get_font_for_language(language):
         return font_japanese
     elif language == "Korean":
         return font_korean
+    elif language == "Sinhala":
+        return font_sinhala
+    elif language == "Arabic":
+        return font_arabic
     else:
         return font_latin
 
-        # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean]
 
 
 def draw_button(screen, rect, label, font, fill_colour, text_colour):
@@ -1494,6 +1529,11 @@ japanese_rect = pygame.Rect(310, 470, 120, 50)
 korean_rect = pygame.Rect(310, 530, 120, 50)
 german_rect = pygame.Rect(440, 410, 120, 50)
 swedish_rect = pygame.Rect(440, 470, 120, 50)
+russian_rect = pygame.Rect(400, 530, 120, 50)
+sinhala_rect = pygame.Rect(530, 410, 120, 50)
+latin_rect = pygame.Rect(530, 470, 120, 50)
+greek_rect = pygame.Rect(530, 530, 120, 50)
+arabic_rect = pygame.Rect(660, 410, 120, 50)
 
 pinyin_rect = pygame.Rect(60, 460, 100, 30)
 
@@ -1598,6 +1638,41 @@ while running:
                         print(languages)
                     else:
                         languages.remove("Swedish")
+                        print(languages)
+                elif russian_rect.collidepoint(event.pos):
+                    if "Russian" not in languages:
+                        languages.append("Russian")
+                        print(languages)
+                    else:
+                        languages.remove("Russian")
+                        print(languages)
+                elif sinhala_rect.collidepoint(event.pos):
+                    if "Sinhala" not in languages:
+                        languages.append("Sinhala")
+                        print(languages)
+                    else:
+                        languages.remove("Sinhala")
+                        print(languages)
+                elif latin_rect.collidepoint(event.pos):
+                    if "Latin" not in languages:
+                        languages.append("Latin")
+                        print(languages)
+                    else:
+                        languages.remove("Latin")
+                        print(languages)
+                elif greek_rect.collidepoint(event.pos):
+                    if "Greek" not in languages:
+                        languages.append("Greek")
+                        print(languages)
+                    else:
+                        languages.remove("Greek")
+                        print(languages)
+                elif arabic_rect.collidepoint(event.pos):
+                    if "Arabic" not in languages:
+                        languages.append("Arabic")
+                        print(languages)
+                    else:
+                        languages.remove("Arabic")
                         print(languages)
                 elif min_speed.collidepoint(event.pos):
                     if not max_boulder_speed == 1.0:
@@ -1767,6 +1842,46 @@ while running:
         else: 
             swedish_colour = PURPLE
         draw_button(screen, swedish_rect, "Swedish", button_font, swedish_colour, WHITE)
+
+        if "Russian" in languages:
+            russian_colour = (25, 25, 25)
+        elif russian_rect.collidepoint(mouse_pos):
+            russian_colour = (180, 0, 180)
+        else: 
+            russian_colour = PURPLE
+        draw_button(screen, russian_rect, "Russian", button_font, russian_colour, WHITE)
+
+        if "Sinhala" in languages:
+            sinhala_colour = (25, 25, 25)
+        elif sinhala_rect.collidepoint(mouse_pos):
+            sinhala_colour = (180, 0, 180)
+        else: 
+            sinhala_colour = PURPLE
+        draw_button(screen, sinhala_rect, "Sinhala", button_font, sinhala_colour, WHITE)
+
+        if "Latin" in languages:
+            latin_colour = (25, 25, 25)
+        elif latin_rect.collidepoint(mouse_pos):
+            latin_colour = (180, 0, 180)
+        else: 
+            latin_colour = PURPLE
+        draw_button(screen, latin_rect, "Latin", button_font, latin_colour, WHITE)
+
+        if "Greek" in languages:
+            greek_colour = (25, 25, 25)
+        elif greek_rect.collidepoint(mouse_pos):
+            greek_colour = (180, 0, 180)
+        else: 
+            greek_colour = PURPLE
+        draw_button(screen, greek_rect, "Greek", button_font, greek_colour, WHITE)
+
+        if "Arabic" in languages:
+            arabic_colour = (25, 25, 25)
+        elif arabic_rect.collidepoint(mouse_pos):
+            arabic_colour = (180, 0, 180)
+        else: 
+            arabic_colour = PURPLE
+        draw_button(screen, arabic_rect, "Arabic", button_font, arabic_colour, WHITE)
 
         # [Chinese, Hindi, French, Hebrew, Spanish, Tamil, Japanese, Korean, German, Swedish] 
 
