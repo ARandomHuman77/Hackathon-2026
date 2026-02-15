@@ -1469,7 +1469,7 @@ game_on = False
 game_over = False  # New state for game over screen
 
 
-sad_song_files = ["meow.wav", "rickroll_proper.wav", "communism.wav", "orphans.wav"]
+sad_song_files = ["meow.wav", "rickroll_proper.wav", "communism.wav", "orphans.wav", "loser.wav"]
 
 # Variable that keeps track if the music is playing
 end_music_playing = False
