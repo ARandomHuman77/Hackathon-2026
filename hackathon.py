@@ -1195,7 +1195,12 @@ language_to_index = {
     "Japanese": 6,
     "Korean": 7,
     "German": 8,
-    "Swedish": 9
+    "Swedish": 9,
+    "Russian":10,
+    "Sinhala": 11, 
+    "Latin": 12, 
+    "Greek": 13,
+    "Arabic": 14
 }
 
 
@@ -1535,7 +1540,7 @@ latin_rect = pygame.Rect(530, 470, 120, 50)
 greek_rect = pygame.Rect(530, 530, 120, 50)
 arabic_rect = pygame.Rect(660, 410, 120, 50)
 
-pinyin_rect = pygame.Rect(60, 460, 100, 30)
+pinyin_rect = pygame.Rect(20, 460, 100, 30)
 
 # boulder speeds button format
 min_speed = pygame.Rect(680, 450, 120, 50)
